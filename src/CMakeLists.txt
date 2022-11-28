@@ -1,0 +1,7 @@
+add_subdirectory(usuario)
+add_subdirectory(curso)
+add_subdirectory(lista_cursos)
+add_subdirectory(estadisticas)
+add_subdirectory(recurso)
+#add_subdirectory(administrador_aplicacion)
+#add_subdirectory(administraodr_cursos)

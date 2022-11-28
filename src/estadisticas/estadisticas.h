@@ -25,7 +25,7 @@ class Estadisticas{
 		inline float get_exito(){return exito_;};
 		inline void set_exito(float exito){exito_=exito;};
 
-		float obtenerExito();
+		inline float obtenerExito() { return exito_;} ;
 };
 
 

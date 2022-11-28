@@ -17,13 +17,3 @@ Estadisticas::Estadisticas(int participantes, int max_participantes){
 	exito_=exito;
 }
 
-float Estadisticas::obtenerExito(){
-
-
-
-}
-
-
-
-
-
