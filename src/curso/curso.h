@@ -13,6 +13,10 @@ class Curso {
         int participantes_, max_participantes_;
         float exito_;
     public:
+    
+        Curso(std::string id, std::string nombre, std::string descripcion, time_t fecha_inicio, time_t fecha_fin, std::string correo_admin_curso,
+              std::string ponentes, std::string requisitos, int participantes, int max_participantes);
+    
         inline std::string get_id() { return id_; };
         inline void set_id(std::string id) { id_ = id; };
         inline std::string get_nombre() { return nombre_; };
