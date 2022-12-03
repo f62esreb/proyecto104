@@ -63,6 +63,30 @@ Lista_Cursos inicializarCursos() {
     return L;
 }
 
+Lista_Usuarios inicializarUsuarios()
+{
+    Lista_Usuarios L;
+
+    std::ifstream input("usuarios.txt");
+
+    while (!input.eof()) {
+        
+        std::string id_usuario, nombre, password, correo;
+        std::string dummy;
+
+        getline(input, id_usuario);
+        getline(input, nombre);
+        getline(input, password);
+        getline(input, correo);
+        getline(input, dummy);
+    
+        Usuario c(id_usuario, nombre, password, correo);
+        L.addUsuario(c);
+    }
+        
+    return L;
+}
+
 void menu_estudiante() {
     std::cout << "1. Ver los cursos disponibles" << std::endl;
     std::cout << "2. Ver un curso en especifico" << std::endl;

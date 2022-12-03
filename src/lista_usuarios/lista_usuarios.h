@@ -1,0 +1,18 @@
+#ifndef LISTA_USUARIOS_H
+#define LISTA_USURIOS_H
+
+#include <list>
+#include <string>
+#include "../usuario/usuario.h"
+
+class Lista_Usuarios {
+    private:
+        std::list<Usuario> lista_usuarios_;
+    public:
+        Usuario verUsuario(std::string id);
+        bool addUsuario(Usuario usuario);
+        bool modificarUsuario(std::string id, Usuario usuario);
+};
+
+
+#endif

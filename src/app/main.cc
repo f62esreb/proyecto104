@@ -4,6 +4,7 @@
 int main() {
     std::string dni, pass;
     Lista_Cursos cursos = inicializarCursos();
+    Lista_Usuarios usuarios = inicializarUsuarios();
 
     std::cout << "-- SISTEMA DE CURSOS DE EXTENSIÓN DE LA UNIVERSIDAD DE CÓRDOBA --";
     std::cout << "-- INICIO DE SESIÓN ---------------------------------------------";
