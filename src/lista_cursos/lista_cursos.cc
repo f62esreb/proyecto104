@@ -2,14 +2,15 @@
 
 
 Curso Lista_Cursos::verCurso(std::string id) { 
-    Curso c;
+    Curso empty("none", "none", "none", 0, 0, "none", "none", "none", 0, 0);
+    
     for ( Curso c : lista_cursos_ ) {
         if ( c.get_id() == id ) { 
             return c;
         }
     }
 
-    return c;
+    return empty;
 }
 
 bool Lista_Cursos::addCurso(Curso curso) {
@@ -19,6 +20,7 @@ bool Lista_Cursos::addCurso(Curso curso) {
         }
     }
 
+    lista_cursos_.push_back(curso);
     return true;
 }
 

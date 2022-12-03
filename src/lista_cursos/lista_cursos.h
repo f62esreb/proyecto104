@@ -3,7 +3,7 @@
 
 #include <list>
 #include <string>
-#include "curso.h"
+#include "../curso/curso.h"
 
 class Lista_Cursos {
     private:
