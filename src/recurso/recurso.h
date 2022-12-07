@@ -1,10 +1,3 @@
-/*
- * recurso.h
- *
- *  Created on: 27 nov 2022
- *      Author: belenmaria
- */
-
 #ifndef RECURSO_H_
 #define RECURSO_H_
 
@@ -27,4 +20,4 @@ class Recurso{
 
 
 
-#endif /* RECURSO_H_ */
+#endif
