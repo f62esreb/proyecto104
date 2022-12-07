@@ -1,10 +1,3 @@
-/*
- * estadisticas.cc
- *
- *  Created on: 25 nov 2022
- *      Author: belenmaria
- */
-
 #include"estadisticas.h"
 
 Estadisticas::Estadisticas(int participantes, int max_participantes){
@@ -16,4 +9,3 @@ Estadisticas::Estadisticas(int participantes, int max_participantes){
 
 	exito_=exito;
 }
-
