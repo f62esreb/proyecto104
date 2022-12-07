@@ -23,9 +23,9 @@ class Curso {
         inline void set_nombre(std::string nombre) { nombre_ = nombre; };
         inline std::string get_descripcion() { return descripcion_; };
         inline void set_descripcion(std::string descripcion) { descripcion_ = descripcion; };
-        inline time_t get_fecha_inicio() { return fecha_inicio_; };
+        inline const time_t get_fecha_inicio() const { return fecha_inicio_; };
         inline void set_fecha_inicio(time_t fecha_inicio) { fecha_inicio_ = fecha_inicio; };
-        inline time_t get_fecha_fin() { return fecha_fin_; };
+        inline const time_t get_fecha_fin() const { return fecha_fin_; };
         inline void set_fecha_fin(time_t fecha_fin) { fecha_fin_ = fecha_fin; };
         inline std::string get_correo_admin_curso() { return correo_admin_curso_; };
         inline void set_correo_admin_curso(std::string correo_admin_curso) { correo_admin_curso_ = correo_admin_curso; };
@@ -40,6 +40,7 @@ class Curso {
         inline void set_exito(float exito) { exito_ = exito; };
         bool addInscripcion(std::string id_usuario);
         bool quitarInscripcion(std::string id_usuario);
+        bool cargarListaParticipantes();
 };
 
 

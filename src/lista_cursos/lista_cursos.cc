@@ -1,5 +1,5 @@
 #include "lista_cursos.h"
-
+#include <iostream>
 
 Curso Lista_Cursos::verCurso(std::string id) { 
     Curso empty("none", "none", "none", 0, 0, "none", "none", "none", 0, 0);

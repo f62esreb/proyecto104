@@ -34,6 +34,17 @@ Lista_Cursos inicializarCursos() {
 
     std::ifstream input("cursos.txt");
 
+    if (!input.is_open()) {
+        std::ofstream input("cursos.txt");
+        input.close();
+        return L;
+    }
+
+    if (input.peek() == 0) {
+        input.close();
+        return L;
+    }
+
     while (!input.eof()) {
         struct tm timet_inicio;
         struct tm timet_fin;
@@ -56,9 +67,12 @@ Lista_Cursos inicializarCursos() {
         getline(input, max_participantes);
         getline(input, dummy);
 
-        Curso c(id, nombre, descripcion, crearFecha(fecha_inicio), crearFecha(fecha_fin), correo_admin_curso, ponentes, requisitos, stoi(participantes), stoi(max_participantes));
+        Curso c(id, nombre, descripcion, crearFecha(fecha_inicio), crearFecha(fecha_fin), correo_admin_curso, ponentes, requisitos, std::stoi(participantes), std::stoi(max_participantes));
+        c.cargarListaParticipantes();
         L.addCurso(c);
     }
+
+    input.close();
 
     return L;
 }
@@ -69,8 +83,20 @@ Lista_Usuarios inicializarUsuarios()
 
     std::ifstream input("usuarios.txt");
 
-    while (!input.eof()) {
+    if (!input.is_open()) {
+        std::cout << "Pasa esto" << std::endl;
         
+        std::ofstream input("usuarios.txt");
+        input.close();
+        }
+
+    if (input.peek() == std::ifstream::traits_type::eof()) {
+        input.close();
+        std::cout << "Pasa esto otro" << std::endl;
+        return L;
+    }
+
+    while (!input.eof()) {
         std::string id_usuario, nombre, password, correo;
         std::string dummy;
 
@@ -81,17 +107,48 @@ Lista_Usuarios inicializarUsuarios()
         getline(input, dummy);
     
         Usuario c(id_usuario, nombre, password, correo);
+        c.cargarCursos();
         L.addUsuario(c);
     }
-        
+    
+    input.close();
+
     return L;
 }
 
-void menu_estudiante() {
+void mostrarCurso(Curso c) {
+    std::cout << "ID del curso: " << c.get_id() << std::endl;
+    std::cout << "Nombre: " << c.get_nombre() << std::endl;
+    std::cout << "Descripcion: " << c.get_descripcion() << std::endl;
+    time_t time = c.get_fecha_inicio();
+    std::cout << "Fecha inicio de curso: " << std::asctime(localtime(&time));
+    time = c.get_fecha_fin();
+    std::cout << "Fecha fin de curso: " << std::asctime(localtime(&time));
+    std::cout << "Ponentes: " << c.get_ponentes() << std::endl;
+    std::cout << "Participantes: " << c.get_participantes() << std::endl;
+    std::cout << "Max participantes: " << c.get_max_participantes() << std::endl;
+    std::cout << "Para mas informacion pongase en contacto con " << c.get_correo_admin_curso() << std::endl;
+}
+
+void mostrarCursos(Lista_Cursos cursos) {
+    for (Curso c: cursos.verCursos()) {
+        std::cout << "ID del curso: " << c.get_id() << std::endl;
+        std::cout << "Nombre: " << c.get_nombre() << std::endl;
+        std::cout << "Descripcion: " << c.get_descripcion() << std::endl;
+        std::cout << "----------------------------------------------" << std::endl;
+    }
+}
+
+void menuEstudiante() {
     std::cout << "1. Ver los cursos disponibles" << std::endl;
     std::cout << "2. Ver un curso en especifico" << std::endl;
     std::cout << "3. Inscribirse en el curso" << std::endl;
-    std::cout << "4. Ver mis cursos" << std::endl;
+    std::cout << "4. Ver mi perfil" << std::endl;
     std::cout << "5. Cerrar sesion" << std::endl;
+}
+
+void menuPrincipal() {
+    std::cout << "1. Ver cursos disponibles" << std::endl;
+    std::cout << "2. Iniciar sesion" << std::endl;
 }
 

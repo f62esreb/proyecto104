@@ -27,4 +27,28 @@ bool Usuario::inscribirseCurso(std::string id_curso){
 return false;
 }
 
+bool Usuario::cargarCursos() { 
+	std::ifstream input("usuario_" + id_usuario_);
+
+    if (!input.is_open()) {
+        std::ofstream input("usuario_" + id_usuario_ + ".txt");
+		input.close();
+		return false;
+	}
+
+    if (input.peek() == 0) {
+		input.close();
+        return false;
+    }
+
+	while (!input.eof()) {
+		std::string id;
+		getline(input, id);
+		lista_cursos_.push_back(id);
+	}
+
+	input.close();
+
+	return true;
+}
 

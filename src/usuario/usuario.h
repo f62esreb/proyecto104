@@ -11,6 +11,8 @@
 
 #include<string>
 #include<list>
+#include<fstream>
+#include<iostream>
 
 class Usuario{
 	private:
@@ -35,6 +37,8 @@ class Usuario{
 		inline void set_id_curso(std::string id_curso){id_curso_=id_curso;};
 
 		bool inscribirseCurso(std::string id);
+
+		bool cargarCursos();
 };
 
 

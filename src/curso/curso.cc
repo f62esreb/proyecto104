@@ -1,6 +1,6 @@
 #include "curso.h"
 #include <list>
-
+#include <fstream>
 
 Curso::Curso(std::string id, std::string nombre, std::string descripcion, time_t fecha_inicio, time_t fecha_fin, std::string correo_admin_curso,
              std::string ponentes, std::string requisitos, int participantes, int max_participantes){
@@ -37,4 +37,29 @@ bool Curso::quitarInscripcion(std::string id_usuario) {
     }
 
     return false;
+}
+
+bool Curso::cargarListaParticipantes() { 
+	std::ifstream input("curso_" + id_ + ".txt");
+
+    if (!input.is_open()) {
+        std::ofstream input("curso_" + id_ + ".txt");
+		input.close();
+		return false;
+	}
+
+    if (input.peek() == 0) {
+		input.close();
+        return false;
+    }
+
+	while (!input.eof()) {
+		std::string id;
+		getline(input, id);
+		id_participantes_.push_back(id);
+	}
+
+	input.close();
+
+	return true;
 }

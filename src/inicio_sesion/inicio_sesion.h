@@ -9,7 +9,7 @@
 class Inicio_Sesion {
 
     private:
-        std::string id_usuario_;
+        std::string id_usuario_ = "empty";
         Lista_Usuarios & lista_usuarios_;
     public:
 
