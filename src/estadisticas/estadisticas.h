@@ -1,10 +1,3 @@
-/*
- * estadisticas.h
- *
- *  Created on: 25 nov 2022
- *      Author: belenmaria
- */
-
 #ifndef ESTADISTICAS_H_
 #define ESTADISTICAS_H_
 
@@ -29,4 +22,4 @@ class Estadisticas{
 };
 
 
-#endif /* ESTADISTICAS_H_ */
+#endif
