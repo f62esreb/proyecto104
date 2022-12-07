@@ -1,9 +1,3 @@
-/*
- * usuario.cc
- *
- *  Created on: 25 nov 2022
- *      Author: belenmaria
- */
 #include"usuario.h"
 
 Usuario::Usuario(std::string id_usuario, std::string nombre, std::string password, std::string correo){
