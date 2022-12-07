@@ -1,10 +1,3 @@
-/*
- * recurso.cc
- *
- *  Created on: 27 nov 2022
- *      Author: belenmaria
- */
-
 #include"recurso.h"
 
 bool Recurso::crearRecurso(std::string id_recurso){
@@ -20,5 +13,3 @@ bool Recurso::crearRecurso(std::string id_recurso){
 	}
 return false;
 }
-
-
