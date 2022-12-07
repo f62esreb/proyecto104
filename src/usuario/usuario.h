@@ -1,10 +1,3 @@
-/*
- * usuario.h
- *
- *  Created on: 25 nov 2022
- *      Author: belenmaria
- */
-
 #ifndef USUARIO_H
 #define USUARIO_H
 
@@ -43,4 +36,4 @@ class Usuario{
 
 
 
-#endif /* USUARIO_H */
+#endif 
