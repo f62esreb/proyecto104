@@ -4,6 +4,7 @@
 #include <list>
 #include <string>
 #include "../curso/curso.h"
+#include <fstream>
 
 class Lista_Cursos {
     private:
@@ -14,6 +15,7 @@ class Lista_Cursos {
         bool addCurso(Curso curso);
         bool quitarCurso(Curso curso);
         bool modificarCurso(std::string id, Curso curso);
+        bool guardarCursos();
 };
 
 

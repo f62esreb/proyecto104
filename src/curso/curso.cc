@@ -63,3 +63,17 @@ bool Curso::cargarListaParticipantes() {
 
 	return true;
 }
+
+bool Curso::guardarListaParticipantes()
+{
+    std::ofstream input("curso_"+ id_ +".txt");
+
+    for(std::string id : id_participantes_)
+    {
+        input << id << "\n";
+    }
+    
+    input.close();
+
+    return true;
+}

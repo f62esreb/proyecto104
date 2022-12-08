@@ -41,6 +41,7 @@ class Curso {
         bool addInscripcion(std::string id_usuario);
         bool quitarInscripcion(std::string id_usuario);
         bool cargarListaParticipantes();
+        bool guardarListaParticipantes();
 };
 
 

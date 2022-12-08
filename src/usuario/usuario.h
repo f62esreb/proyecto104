@@ -32,6 +32,7 @@ class Usuario{
 		bool inscribirseCurso(std::string id);
 
 		bool cargarCursos();
+		bool guardarCursos();
 };
 
 

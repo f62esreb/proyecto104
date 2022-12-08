@@ -46,3 +46,17 @@ bool Usuario::cargarCursos() {
 	return true;
 }
 
+
+bool Usuario::guardarCursos()
+{
+	std::ofstream input("usuario_" + id_usuario_ + ".txt");
+
+	for(std::string id : lista_cursos_)
+	{
+		input << id << "\n";
+	}
+
+	input.close();
+
+    return true;
+}

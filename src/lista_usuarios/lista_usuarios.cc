@@ -33,3 +33,23 @@ bool Lista_Usuarios::modificarUsuario(std::string id, Usuario usuario) {
 
     return false;
 }
+
+
+bool Lista_Usuarios :: guardarUsuarios()
+{
+    std::ofstream input("usuarios.txt");
+
+    for ( Usuario u : lista_usuarios_ ) 
+    {
+        input << u.get_id_usuario() << "\n";
+        input <<u.get_name()<< "\n";
+        input <<u.get_password()<< "\n";
+        input <<u.get_correo()<< "\n";
+        input <<"\n";
+
+    }
+
+    input.close();
+
+    return true;
+}

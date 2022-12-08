@@ -45,3 +45,27 @@ bool Lista_Cursos::modificarCurso(std::string id, Curso curso) {
 
     return false;
 }
+
+bool Lista_Cursos :: guardarCursos()
+{
+    std::ofstream input("cursos.txt");
+
+    for ( Curso c : lista_cursos_ ) 
+    {
+        input << c.get_id()<< "\n";
+        input << c.get_nombre()<< "\n";
+        input << c.get_descripcion()<< "\n";
+        input << c.get_fecha_inicio()<< "\n";
+        input << c.get_fecha_fin()<< "\n";
+        input << c.get_correo_admin_curso()<< "\n";
+        input << c.get_ponentes()<< "\n";
+        input << c.get_requisitos()<< "\n";
+        input << c.get_participantes()<< "\n";
+        input << c.get_max_participantes()<< "\n";
+        input << "\n";
+    }
+
+    input.close();
+
+    return true;
+}

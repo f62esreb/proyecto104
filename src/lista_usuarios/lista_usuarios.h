@@ -4,6 +4,7 @@
 #include <list>
 #include <string>
 #include "../usuario/usuario.h"
+#include <fstream>
 
 class Lista_Usuarios {
     private:
@@ -12,6 +13,7 @@ class Lista_Usuarios {
         Usuario verUsuario(std::string id);
         bool addUsuario(Usuario usuario);
         bool modificarUsuario(std::string id, Usuario usuario);
+        bool guardarUsuarios();
 };
 
 

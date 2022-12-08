@@ -27,8 +27,9 @@ int main() {
 
         if ( login.get_id_usuario() != "empty" ) {
             int option;
+            Usuario usuario = usuarios.verUsuario(login.get_id_usuario());
 
-            std::cout << "Bienvenido, " << login.get_id_usuario() << std::endl;
+            std::cout << "Bienvenido, " << usuario.get_name() << std::endl;
             menuEstudiante();
             
             std::cout << "> ";
