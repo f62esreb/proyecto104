@@ -69,3 +69,18 @@ bool Lista_Cursos :: guardarCursos()
 
     return true;
 }
+
+bool Lista_Cursos :: inscripcion(std::string id, std::string id_usuario){
+    for (Curso c: lista_cursos_){
+        if(c.get_id()==id){
+            c.addInscripcion(id_usuario);
+            std::cout<<"La inscripcion se ha realizado con exito.";
+            return true;
+        }
+        else{
+            std::cout<<"Error al realizar la inscripcion.";
+            return false;
+        }
+    }
+    return false;
+}

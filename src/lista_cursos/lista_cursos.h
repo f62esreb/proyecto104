@@ -16,6 +16,7 @@ class Lista_Cursos {
         bool quitarCurso(Curso curso);
         bool modificarCurso(std::string id, Curso curso);
         bool guardarCursos();
+        bool inscripcion(std::string id, std::string id_usuario);
 };
 
 
