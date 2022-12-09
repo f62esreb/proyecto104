@@ -2,7 +2,7 @@
 #include <iostream>
 
 int main() {
-    std::string dni, pass;
+    std::string dni, pass,id_usuario;
     bool login_page = true;
 
     Lista_Cursos cursos = inicializarCursos();
@@ -46,6 +46,19 @@ int main() {
                 std::cin >> id;
                 
                 mostrarCurso(cursos.verCurso(id));
+                break;
+            case 3:
+                std::cout<<"Introduzca el ID del curso: ";
+                std::cin>> id;
+
+                std::cout<<"Introduzca su ID: ";
+                std::cin>>id_usuario;
+
+                cursos.inscripcion(id, id_usuario);
+                
+                if(cursos.inscripcion(id,id_usuario)==true){
+                    usuarios.inscripcionUsuario(id_usuario, id);
+                }
                 break;
             case 5:
                 std::cout << "Cerrando sesion" << std::endl;
