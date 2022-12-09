@@ -14,6 +14,7 @@ class Lista_Usuarios {
         bool addUsuario(Usuario usuario);
         bool modificarUsuario(std::string id, Usuario usuario);
         bool guardarUsuarios();
+        bool inscripcionUsuario(std::string id_usuario, std::string id);
 };
 
 

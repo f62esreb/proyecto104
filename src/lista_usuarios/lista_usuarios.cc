@@ -53,3 +53,18 @@ bool Lista_Usuarios :: guardarUsuarios()
 
     return true;
 }
+
+bool Lista_Usuarios::inscripcionUsuario(std::string id_usuario, std::string id){
+
+    for (Usuario u: lista_usuarios_){
+        if(u.get_id_usuario()==id_usuario){
+            u.inscribirseCurso(id);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    return false;
+
+}
