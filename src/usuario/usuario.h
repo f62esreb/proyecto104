@@ -9,7 +9,7 @@
 
 class Usuario{
 	private:
-		std::string id_usuario_,nombre_,password_,correo_, id_curso_;
+		std::string id_usuario_,nombre_,password_,correo_;
 		std::list<std::string>  lista_cursos_;
 	public:
 		Usuario(std::string id_usuario, std::string nombre, std::string password, std::string correo);
@@ -26,8 +26,7 @@ class Usuario{
 		inline std::string get_correo(){return correo_;};
 		inline void set_correo(std::string correo){correo_=correo;};
 
-		inline std::string get_id_curso(){return id_curso_;};
-		inline void set_id_curso(std::string id_curso){id_curso_=id_curso;};
+		inline std::list<std::string> get_cursos() { return lista_cursos_; };
 
 		bool inscribirseCurso(std::string id);
 

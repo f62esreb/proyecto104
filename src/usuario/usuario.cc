@@ -9,20 +9,19 @@ Usuario::Usuario(std::string id_usuario, std::string nombre, std::string passwor
 
 bool Usuario::inscribirseCurso(std::string id_curso){
 	for (auto it = lista_cursos_.begin(); it != lista_cursos_.end(); it++) {
-	        if ( *it == id_curso ) {
-	            return false;
-	        }
-	        else{
-	        	lista_cursos_.push_back(id_curso);
-	        	return true;
-	        }
-
+	    if ( *it == id_curso ) {
+	        return false;
+	    }
 	}
-return false;
+
+	lista_cursos_.push_back(id_curso);
+	this->guardarCursos();
+
+	return true;
 }
 
 bool Usuario::cargarCursos() { 
-	std::ifstream input("usuario_" + id_usuario_);
+	std::ifstream input("usuario_" + id_usuario_ + ".txt");
 
     if (!input.is_open()) {
         std::ofstream input("usuario_" + id_usuario_ + ".txt");
@@ -38,7 +37,9 @@ bool Usuario::cargarCursos() {
 	while (!input.eof()) {
 		std::string id;
 		getline(input, id);
-		lista_cursos_.push_back(id);
+		if (id.size() > 0) {
+			lista_cursos_.push_back(id);
+        }
 	}
 
 	input.close();

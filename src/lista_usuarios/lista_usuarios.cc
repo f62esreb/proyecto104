@@ -1,9 +1,9 @@
 #include "lista_usuarios.h"
 
-Usuario Lista_Usuarios::verUsuario(std::string id)
+Usuario& Lista_Usuarios::verUsuario(std::string id)
 {
-    Usuario u("empty","empty","empty","empty");
-    for ( Usuario c : lista_usuarios_ ) {
+    Usuario& u = empty;
+    for ( Usuario& c : lista_usuarios_ ) {
         if ( c.get_id_usuario() == id ) { 
             return c;
         }
@@ -55,16 +55,18 @@ bool Lista_Usuarios :: guardarUsuarios()
 }
 
 bool Lista_Usuarios::inscripcionUsuario(std::string id_usuario, std::string id){
-
-    for (Usuario u: lista_usuarios_){
-        if(u.get_id_usuario()==id_usuario){
-            u.inscribirseCurso(id);
-            return true;
-        }
-        else{
+    for (auto u = lista_usuarios_.begin(); u != lista_usuarios_.end(); u++){
+        if(u->get_id_usuario()==id_usuario){
+            if (u->inscribirseCurso(id) == true) {
+                return true;
+            }
+            std::cout << "Error: el usuario ya esta inscrito en el curso" << std::endl;
             return false;
         }
     }
-    return false;
 
+    this->guardarUsuarios();
+    
+    return false;
 }
+

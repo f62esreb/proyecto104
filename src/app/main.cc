@@ -2,7 +2,7 @@
 #include <iostream>
 
 int main() {
-    std::string dni, pass,id_usuario;
+    std::string dni, pass;
     bool login_page = true;
 
     Lista_Cursos cursos = inicializarCursos();
@@ -27,7 +27,7 @@ int main() {
 
         if ( login.get_id_usuario() != "empty" ) {
             int option;
-            Usuario usuario = usuarios.verUsuario(login.get_id_usuario());
+            Usuario& usuario = usuarios.verUsuario(login.get_id_usuario());
 
             std::cout << "Bienvenido, " << usuario.get_name() << std::endl;
             menuEstudiante();
@@ -41,31 +41,55 @@ int main() {
             case 1:
                 mostrarCursos(cursos);
                 break;
+
             case 2:
                 std::cout << "Introduce el ID del curso a continuación: ";
                 std::cin >> id;
                 
                 mostrarCurso(cursos.verCurso(id));
                 break;
+
             case 3:
                 std::cout<<"Introduzca el ID del curso: ";
                 std::cin>> id;
 
-                std::cout<<"Introduzca su ID: ";
-                std::cin>>id_usuario;
-
-                cursos.inscripcion(id, id_usuario);
-                
-                if(cursos.inscripcion(id,id_usuario)==true){
-                    usuarios.inscripcionUsuario(id_usuario, id);
+                if(cursos.inscripcion(id, login.get_id_usuario())==true){
+                    if (usuarios.inscripcionUsuario(login.get_id_usuario(), id)) {
+                        std::cout<<"La inscripcion se ha realizado con exito." << std::endl;
+                    } else {
+                        std::cout<<"Error, ya se encuentra inscrito a este curso" << std::endl;
+                    }
+                } else {
+                    std::cout << "El curso al que intenta inscribirse no existe" << std::endl;
                 }
+
                 break;
+
+            case 4:
+                usuario = usuarios.verUsuario(login.get_id_usuario());
+
+                std::cout << "Perfil para " << usuario.get_name() << std::endl;
+                std::cout << "-- INFORMACION GENERAL ----" << std::endl;
+                std::cout << "Correo electronico " << usuario.get_correo() << std::endl;
+                std::cout << "Numero de identidad " << usuario.get_id_usuario() << std::endl;
+                std::cout << "-- CURSOS DEL USUARIO -----" << std::endl;
+                for ( std::string curso : usuario.get_cursos() ) {
+                        std::cout << "ID del curso: " << curso << std::endl;
+                        std::cout << "Nombre del curso: " << cursos.verCurso(curso).get_nombre() << std::endl;
+                        std::cout << "-----------------------------" << std::endl;
+                    }
+
+                break;
+
             case 5:
                 std::cout << "Cerrando sesion" << std::endl;
                 login.cerrarSesion();
+
                 break;
             
             default:
+                std::cout << "Error: opción invalida." << std::endl;
+
                 break;
             }
         }

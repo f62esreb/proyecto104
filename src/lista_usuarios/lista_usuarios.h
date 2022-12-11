@@ -8,9 +8,11 @@
 
 class Lista_Usuarios {
     private:
+        Usuario empty;
         std::list<Usuario> lista_usuarios_;
     public:
-        Usuario verUsuario(std::string id);
+        Lista_Usuarios(): empty("empty", "empty", "empty", "empty") {};
+        Usuario& verUsuario(std::string id);
         bool addUsuario(Usuario usuario);
         bool modificarUsuario(std::string id, Usuario usuario);
         bool guardarUsuarios();
