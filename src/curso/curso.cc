@@ -73,7 +73,6 @@ bool Curso::cargarListaParticipantes() {
 
 bool Curso::guardarListaParticipantes()
 {
-    std::cout << "Algo extraño pasaba en esta linea de codigo" << std::endl;
     std::ofstream input("curso_"+ id_ +".txt");
 
     for(std::string id : id_participantes_)
