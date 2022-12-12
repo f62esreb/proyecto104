@@ -11,7 +11,7 @@ class Administrador_Recursos: public Usuario {
     private:
         Lista_Cursos &cursos_;
     public:
-        Administrador_Recursos(Lista_Cursos &cursos): cursos_(cursos), Usuario("admin_cursos", "admin_cursos", "admin_cursos", "admin_cursos@uco.es") {this->cargarAdministrador(); };
+        Administrador_Recursos(Lista_Cursos &cursos): cursos_(cursos), Usuario("admin_recursos", "admin_recursos", "admin_recursos", "admin_recursos@uco.es") {this->cargarAdministrador(); };
         bool cargarAdministrador();
         
         //inline bool addCurso(Curso c) { return cursos_.addCurso(c); };
