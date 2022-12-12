@@ -15,7 +15,7 @@ time_t crearFecha(std::string& fecha) {
     std::string numero;
 
     while (getline(ss, numero, '-')) {
-        numeros_fecha.push_back(stoi(numero));
+        numeros_fecha.push_back(std::stoi(numero));
     }
 
     tm_fecha.tm_mday = numeros_fecha[0];
@@ -83,16 +83,13 @@ Lista_Usuarios inicializarUsuarios()
 
     std::ifstream input("usuarios.txt");
 
-    if (!input.is_open()) {
-        std::cout << "Pasa esto" << std::endl;
-        
+    if (!input.is_open()) {      
         std::ofstream input("usuarios.txt");
         input.close();
         }
 
     if (input.peek() == std::ifstream::traits_type::eof()) {
         input.close();
-        std::cout << "Pasa esto otro" << std::endl;
         return L;
     }
 

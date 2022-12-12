@@ -1,9 +1,11 @@
 #ifndef LISTA_USUARIOS_H
 #define LISTA_USURIOS_H
 
+#pragma once
+#include "../usuario/usuario.h"
+
 #include <list>
 #include <string>
-#include "../usuario/usuario.h"
 #include <fstream>
 
 class Lista_Usuarios {

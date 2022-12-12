@@ -8,12 +8,14 @@ int main() {
 
     Lista_Cursos cursos = inicializarCursos();
     Lista_Usuarios usuarios = inicializarUsuarios();
-    Inicio_Sesion login(usuarios);
 
+    Administrador_Cursos admin_cursos(cursos);
+    Administrador_Recursos admin_recursos(cursos);
+    Administrador_Aplicacion admin_app(cursos, usuarios);
 
+    Inicio_Sesion login(usuarios, admin_cursos, admin_recursos, admin_app);
 
-
-
+    
     while ( true ) {
         while ( login.get_id_usuario() == "empty" ) {
             menuPrincipal();
@@ -44,7 +46,10 @@ int main() {
             }
         }
 
-        if ( login.get_id_usuario() != "empty" ) {
+        if ( login.get_tipo_admin() != "none" ) {
+            std::cout << "Bienvenido administrador cualquiera" << std::endl;
+            login.cerrarSesion();
+        } else if ( login.get_id_usuario() != "empty" ) {
             Usuario& usuario = usuarios.verUsuario(login.get_id_usuario());
 
             std::cout << "Bienvenido, " << usuario.get_name() << std::endl;

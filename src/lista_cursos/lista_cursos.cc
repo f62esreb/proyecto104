@@ -21,8 +21,6 @@ bool Lista_Cursos::addCurso(Curso curso) {
     }
     
     lista_cursos_.push_back(curso);
-
-    this->guardarCursos();
     return true;
 }
 
