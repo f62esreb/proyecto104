@@ -7,6 +7,7 @@
 class Curso {
     private:
         std::list<std::string> id_participantes_;
+        std::list<Recurso> recursos_;
         std::string id_, nombre_, descripcion_;
         time_t fecha_inicio_, fecha_fin_;
         std::string correo_admin_curso_, ponentes_, requisitos_;
