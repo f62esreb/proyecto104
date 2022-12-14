@@ -8,8 +8,10 @@
 
 class Lista_Cursos {
     private:
+        Curso empty;
         std::list<Curso> lista_cursos_;
     public:
+        Lista_Cursos() : empty("none", "none", "none", 0, 0, "none", "none", "none", 0, 0) {};
         inline std::list<Curso> verCursos() { return lista_cursos_; };
         Curso & verCurso(std::string id);
         bool addCurso(Curso curso);

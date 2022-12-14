@@ -17,6 +17,7 @@ class Administrador_Recursos: public Usuario {
         Administrador_Recursos(Lista_Cursos &cursos): cursos_(cursos), Usuario("admin_recursos", "admin_recursos", "admin_recursos", "admin_recursos@uco.es") {this->cargarAdministrador(); };
         bool cargarAdministrador();
         bool addRecurso(std::string id, Recurso R );
+        inline std::list<Recurso> verRecursosDisponibles() {return recursos_;};
         bool quitarRecurso(std::string id, std::string id_recurso);
         bool addRecurso_Sistema(Recurso R);
         bool quitarRecurso_Sistema(std::string id);

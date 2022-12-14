@@ -52,7 +52,7 @@ bool Administrador_Recursos::cargarAdministrador() {
 
         if(c.get_id() == "empty"){return false;}
 
-        Recurso R = c.quitarRecurso(id);
+        Recurso R = c.quitarRecurso(id_recurso);
 
         if(R.get_id_recurso() == "empty"){return false;}
         this -> addRecurso_Sistema(R);

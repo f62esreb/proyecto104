@@ -1,12 +1,10 @@
 #include "lista_cursos.h"
 #include <iostream>
 
-Curso & Lista_Cursos::verCurso(std::string id) { 
-    Curso empty("none", "none", "none", 0, 0, "none", "none", "none", 0, 0);
-    
-    for ( Curso c : lista_cursos_ ) {
-        if ( c.get_id() == id ) { 
-            return c;
+Curso & Lista_Cursos::verCurso(std::string id) {    
+    for (auto it = lista_cursos_.begin(); it != lista_cursos_.end(); it++) {
+        if ( it->get_id() == id ) { 
+            return *it;
         }
     }
 

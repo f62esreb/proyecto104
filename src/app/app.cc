@@ -74,6 +74,7 @@ Lista_Cursos inicializarCursos() {
 
         Curso c(id, nombre, descripcion, stoi(fecha_inicio), stoi(fecha_fin), correo_admin_curso, ponentes, requisitos, std::stoi(participantes), std::stoi(max_participantes));
         c.cargarListaParticipantes();
+        c.cargarListaRecursos();
         L.addCurso(c);
     }
 
@@ -160,3 +161,151 @@ void menuPrincipal() {
     std::cout << "2. Iniciar sesion" << std::endl;
 }
 
+void menuAdminRecursos() {
+    std::cout << "1. Ver cursos disponibles" << std::endl;
+    std::cout << "2. Ver recursos disponibles" << std::endl;
+    std::cout << "3. Ver recursos asignados a un curso" << std::endl;
+    std::cout << "4. Añadir recurso al sistema" << std::endl;
+    std::cout << "5. Quitar recurso del sistema" << std::endl;
+    std::cout << "6. Asignar recurso a un curso" << std::endl;
+    std::cout << "7. Quitar recurso a un curso" << std::endl;
+    std::cout << "8. Cerrar sesion" << std::endl;
+}
+
+void mostrarRecursos(Administrador_Recursos admin_recursos) {
+    int inc, atributo;
+    std::string tipo_recurso;
+
+    std::cout << "Los recursos disponibles en el sistema son:" << std::endl;
+    inc = 0;
+    for ( Recurso R : admin_recursos.verRecursosDisponibles() ){
+        if (R.get_recurso() == Tipo::CAMARA) {
+            tipo_recurso = "Camara con calidad de ";
+            atributo = R.get_calidad_imagen();
+        } else if (R.get_recurso() == Tipo::PROYECTOR) {
+            tipo_recurso = "Proyector con brillo de ";
+            atributo = R.get_brillo();
+        } else if (R.get_recurso() == Tipo::AULA) {
+            tipo_recurso = "Aula con aforo de ";
+            atributo = R.get_aforo();
+        }
+
+        inc++;
+        std::cout << inc <<". " << R.get_id_recurso() <<  "(" << tipo_recurso << atributo << ")" << std::endl;
+    }
+}
+
+void mostrarRecursosCurso(Administrador_Recursos admin_recursos, Lista_Cursos cursos) {
+    std::string id;
+
+    std::cout << "Introduce el ID de un curso: ";
+    std::cin >> id;
+
+    Curso c = cursos.verCurso(id);
+
+    int inc, atributo;
+    std::string tipo_recurso;
+
+    std::cout << "Los recursos disponibles en el curso seleccionado son: " << std::endl;
+    inc = 0;
+
+    for ( Recurso R : c.verRecursos() ) {
+        if (R.get_recurso() == Tipo::CAMARA) {
+            tipo_recurso = "Camara con calidad de ";
+            atributo = R.get_calidad_imagen();
+        } else if (R.get_recurso() == Tipo::PROYECTOR) {
+            tipo_recurso = "Proyector con brillo de ";
+            atributo = R.get_brillo();
+        } else if (R.get_recurso() == Tipo::AULA) {
+            tipo_recurso = "Aula con aforo de ";
+            atributo = R.get_aforo();
+        }
+
+        inc++;
+        std::cout << inc <<". " << R.get_id_recurso() <<  "(" << tipo_recurso << atributo << ")" << std::endl;
+    }
+}
+
+void addRecursoSistema(Administrador_Recursos& admin_recursos) {
+    std::string id;
+    Tipo t;
+    int atributo, tipo_n;
+
+    std::cout << "Introduce el ID del recurso: ";
+    std::cin >> id;
+
+    std::cout << "Seleccione el tipo del recurso: " << std::endl;
+    std::cout << "1. Camara" << std::endl;
+    std::cout << "2. Proyector" << std::endl;
+    std::cout << "3. Aula" << std::endl;
+    std::cout << "> ";
+    std::cin >> tipo_n;
+
+    if (tipo_n == 1) {
+        t = Tipo::CAMARA;
+        std::cout << "Introduce la calidad de la camara (en megapixels)> ";
+        std::cin >> atributo; 
+        Recurso R(id, t, atributo);
+        admin_recursos.addRecurso_Sistema(R);
+    } else if (tipo_n == 2) {
+        t = Tipo::PROYECTOR;
+        std::cout << "Introduce el brillo del proyector (en candelas)> ";
+        std::cin >> atributo; 
+        Recurso R(id, t, 0, atributo);
+        admin_recursos.addRecurso_Sistema(R);
+    } else if (tipo_n == 3) {
+        t = Tipo::AULA;
+        std::cout << "Introduce el aforo maximo del aula> ";
+        std::cin >> atributo;  
+        Recurso R(id, t, 0, 0, atributo);
+        admin_recursos.addRecurso_Sistema(R);
+    } else {
+        std::cout << "Error añadiendo recurso: numero invalido" << std::endl;
+    }
+}
+
+void quitarRecursoSistema(Administrador_Recursos& admin_recursos) {
+    std::string id;
+    
+    std::cout << "Introduce el id de un recurso: ";
+    std::cin >> id;
+
+    if (admin_recursos.quitarRecurso_Sistema(id)) {
+        std::cout << "El recurso se ha quitado de manera correcta." << std::endl;
+    } else {
+        std::cout << "Error quitando recurso del sistema" << std::endl;
+    }
+}
+
+void addRecursoCurso(Administrador_Recursos& admin_recursos, Lista_Cursos& cursos) {
+    std::string id_curso;
+    std::string id_recurso;
+
+    std::cout << "Introduce el ID del curso:";
+    std::cin >> id_curso;
+
+    std::cout << "Introduce el ID del recurso:";
+    std::cin >> id_recurso;
+
+    for (Recurso R : admin_recursos.verRecursosDisponibles()) {
+        if ( R.get_id_recurso() == id_recurso) {
+            admin_recursos.addRecurso(id_curso, R);
+            break;
+        }
+    }
+}
+
+void quitarRecursoCurso(Administrador_Recursos& admin_recursos) {
+    std::string id_curso;
+    std::string id_recurso;
+
+    std::cout << "Introduce el ID del curso:";
+    std::cin >> id_curso;
+
+    std::cout << "Introduce el ID del recurso:";
+    std::cin >> id_recurso;
+
+    if(admin_recursos.quitarRecurso(id_curso, id_recurso)==false){
+        std::cout << "Algo extraño pasaba en esta linea de C++" << std::endl;
+    }
+}

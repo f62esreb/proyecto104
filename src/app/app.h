@@ -14,7 +14,14 @@ Lista_Usuarios inicializarUsuarios();
 time_t crearFecha(std::string& fecha);
 void menuEstudiante();
 void menuPrincipal();
+void menuAdminRecursos();
 void mostrarCursos(Lista_Cursos cursos);
 void mostrarCurso(Curso c);
+void mostrarRecursos(Administrador_Recursos admin_recursos);
+void mostrarRecursosCurso(Administrador_Recursos admin_recursos, Lista_Cursos cursos);
+void addRecursoSistema(Administrador_Recursos& admin_recursos);
+void quitarRecursoSistema(Administrador_Recursos& admin_recursos);
+void addRecursoCurso(Administrador_Recursos& admin_recursos, Lista_Cursos& cursos);
+void quitarRecursoCurso(Administrador_Recursos& admin_recursos);
 
 #endif

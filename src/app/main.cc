@@ -11,6 +11,7 @@ int main() {
 
     Administrador_Cursos admin_cursos(cursos);
     Administrador_Recursos admin_recursos(cursos);
+    admin_recursos.cargarRecursos();
     Administrador_Aplicacion admin_app(cursos, usuarios);
 
     Inicio_Sesion login(usuarios, admin_cursos, admin_recursos, admin_app);
@@ -46,10 +47,48 @@ int main() {
             }
         }
 
-        if ( login.get_tipo_admin() != "none" ) {
-            std::cout << "Bienvenido administrador cualquiera" << std::endl;
-            cursos.guardarCursos();
-            login.cerrarSesion();
+        if ( login.get_tipo_admin() == "recursos" ) {
+            std::cout << "Bienvenido administrador de recursos..." << std::endl;
+            menuAdminRecursos();
+            std::cin >> option;
+
+            switch ( option ) {
+                case 1:
+                    mostrarCursos(cursos);
+                    break;
+                case 2:
+                    mostrarRecursos(admin_recursos);
+                    break;
+
+                case 3:
+                    mostrarRecursosCurso(admin_recursos, cursos);
+                    break;
+
+                case 4:
+                    addRecursoSistema(admin_recursos);
+                    break;
+                
+                case 5:
+                    quitarRecursoSistema(admin_recursos);
+                    break;
+                
+                case 6:
+                    addRecursoCurso(admin_recursos, cursos);
+                    break;
+
+                case 7:
+                    quitarRecursoCurso(admin_recursos);
+                    break;
+
+                case 8:
+                    login.cerrarSesion();
+                    break;
+
+                default:
+                    std::cout << "Error, introduce una opcion valida" << std::endl;
+                    break;
+            }
+
         } else if ( login.get_id_usuario() != "empty" ) {
             Usuario& usuario = usuarios.verUsuario(login.get_id_usuario());
 

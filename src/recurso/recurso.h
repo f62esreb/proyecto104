@@ -18,7 +18,7 @@ class Recurso{
     int calidad_imagen_, brillo_,aforo_;
 
     public:
-    Recurso(std::string id, Tipo recurso, int calidad_imagen=0, int brillo=0, int aforo=0){id_=id; recurso_=recurso;};
+    Recurso(std::string id, Tipo recurso, int calidad_imagen=0, int brillo=0, int aforo=0){id_=id; recurso_=recurso; calidad_imagen_=calidad_imagen; brillo_=brillo; aforo_=aforo;};
 
     inline Tipo get_recurso(){return recurso_;};
     inline void set_recurso(Tipo recurso){recurso_=recurso;};
