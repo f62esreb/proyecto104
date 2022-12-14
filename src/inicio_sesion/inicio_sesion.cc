@@ -30,6 +30,8 @@ bool Inicio_Sesion::iniciarSesion(std::string usuario, std::string password)
             }
         }
 
+        std::cout << admin_recursos_.get_id_usuario() << std::endl;
+
         if (admin_recursos_.get_id_usuario() == usuario) {
             if (admin_recursos_.get_password() == password) {
                 this->set_id_usuario(admin_recursos_.get_id_usuario());

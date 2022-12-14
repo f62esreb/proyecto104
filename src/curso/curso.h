@@ -13,11 +13,12 @@ class Curso {
         time_t fecha_inicio_, fecha_fin_;
         std::string correo_admin_curso_, ponentes_, requisitos_;
         int participantes_, max_participantes_;
+        float precio_;
         float exito_;
     public:
     
         Curso(std::string id, std::string nombre, std::string descripcion, time_t fecha_inicio, time_t fecha_fin, std::string correo_admin_curso,
-              std::string ponentes, std::string requisitos, int participantes, int max_participantes);
+              std::string ponentes, std::string requisitos, int participantes, int max_participantes, float precio);
     
         inline std::string get_id() { return id_; };
         inline void set_id(std::string id) { id_ = id; };
@@ -40,6 +41,8 @@ class Curso {
         inline void set_max_participantes(int max_participantes) { max_participantes_ = max_participantes; };
         inline float get_exito() { return exito_; };
         inline void set_exito(float exito) { exito_ = exito; };
+        inline float get_precio() { return precio_; };
+        inline void set_precio(float precio) { precio_ = precio; };
         bool addInscripcion(std::string id_usuario);
         bool quitarInscripcion(std::string id_usuario);
         bool cargarListaParticipantes();

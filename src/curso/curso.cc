@@ -4,7 +4,7 @@
 #include <fstream>
 
 Curso::Curso(std::string id, std::string nombre, std::string descripcion, time_t fecha_inicio, time_t fecha_fin, std::string correo_admin_curso,
-             std::string ponentes, std::string requisitos, int participantes, int max_participantes){
+             std::string ponentes, std::string requisitos, int participantes, int max_participantes, float precio){
     
     id_=id;
     nombre_=nombre;
@@ -16,6 +16,7 @@ Curso::Curso(std::string id, std::string nombre, std::string descripcion, time_t
     requisitos_=requisitos;
     participantes_=participantes;
     max_participantes_=max_participantes;
+    precio_=precio;
           
 }
 

@@ -66,6 +66,7 @@ bool Lista_Cursos :: guardarCursos()
         input << c.get_requisitos()<< "\n";
         input << c.get_participantes()<< "\n";
         input << c.get_max_participantes()<< "\n";
+        input << c.get_precio() << "\n";
         input << "\n";
     }
 

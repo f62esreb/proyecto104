@@ -25,7 +25,10 @@ bool Administrador_Recursos::cargarAdministrador() {
         getline(input, password);
         getline(input, correo);
     
-        Usuario(id_usuario, nombre, password, correo);
+        this->set_id_usuario(id_usuario);
+        this->set_name(nombre);
+        this->set_password(password);
+        this->set_correo(correo);
     }
 
     input.close();

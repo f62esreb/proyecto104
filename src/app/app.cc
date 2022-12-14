@@ -59,6 +59,7 @@ Lista_Cursos inicializarCursos() {
         std::string correo_admin_curso, ponentes, requisitos;
         std::string participantes, max_participantes;
         std::string dummy;
+        std::string precio;
 
         getline(input, id);
         getline(input, nombre);
@@ -70,9 +71,10 @@ Lista_Cursos inicializarCursos() {
         getline(input, requisitos);
         getline(input, participantes);
         getline(input, max_participantes);
+        getline(input, precio);
         getline(input, dummy);
 
-        Curso c(id, nombre, descripcion, stoi(fecha_inicio), stoi(fecha_fin), correo_admin_curso, ponentes, requisitos, std::stoi(participantes), std::stoi(max_participantes));
+        Curso c(id, nombre, descripcion, stoi(fecha_inicio), stoi(fecha_fin), correo_admin_curso, ponentes, requisitos, std::stoi(participantes), std::stoi(max_participantes), std::stof(precio));
         c.cargarListaParticipantes();
         c.cargarListaRecursos();
         L.addCurso(c);
