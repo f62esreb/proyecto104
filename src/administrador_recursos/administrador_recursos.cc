@@ -32,3 +32,155 @@ bool Administrador_Recursos::cargarAdministrador() {
 
     return true;
 }
+
+    bool Administrador_Recursos:: addRecurso(std::string id, Recurso R )
+    {
+        Curso &c = cursos_.verCurso(id);
+
+        if(c.get_id() == "empty"){return false;}
+
+        this->quitarRecurso_Sistema(R.get_id_recurso());
+
+        this->guardarRecursos();
+
+        return c.addRecurso(R);
+    
+    }
+    bool Administrador_Recursos:: quitarRecurso(std::string id, std::string id_recurso)
+    {
+        Curso &c = cursos_.verCurso(id);
+
+        if(c.get_id() == "empty"){return false;}
+
+        Recurso R = c.quitarRecurso(id);
+
+        if(R.get_id_recurso() == "empty"){return false;}
+        this -> addRecurso_Sistema(R);
+        this->guardarRecursos();
+        return true;
+    }
+
+    bool Administrador_Recursos:: addRecurso_Sistema(Recurso R)
+    {
+        for ( Recurso c : recursos_ ) {
+        if ( c.get_id_recurso() == R.get_id_recurso() ) { 
+            return false;
+        }
+    }
+    
+        recursos_.push_back(R);
+        this->guardarRecursos();
+        return true;
+    }
+
+    bool Administrador_Recursos:: quitarRecurso_Sistema(std::string id)
+    {
+        for ( auto it = recursos_.begin(); it != recursos_.end(); it++ ) {
+           
+            if ( it->get_id_recurso() == id) { 
+
+                it = recursos_.erase(it);
+                this->guardarRecursos();
+            
+                return true;
+        }
+    }
+
+        return false;
+    }
+
+bool Administrador_Recursos::cargarRecursos()
+{
+    std::ifstream input("recursos.txt");
+    std::string numero;
+
+    if (!input.is_open()) {
+        std::ofstream input("recursos.txt");
+		input.close();
+        this->guardarRecursos();
+		return false;
+	}
+
+    if (input.peek() == 0) {
+		input.close();
+        this->guardarRecursos();
+        return false;
+    }
+
+    getline(input, numero);
+
+	for (int i = 0; i < std::stoi(numero); i++) {
+
+        std::string id;
+        std::string tipo;
+        std::string aux;
+        Tipo t;
+
+        getline(input, id);
+        getline(input, tipo);
+        getline(input, aux);
+
+        if(stoi(tipo)==1)
+        {
+            Recurso R(id , Tipo::CAMARA);
+            R.set_calidad_imagen(stoi(aux));
+            recursos_.push_back(R);
+        }
+        else if(stoi(tipo)==2)
+        {
+            Recurso R(id , Tipo::PROYECTOR);
+            R.set_brillo(stoi(aux));
+            recursos_.push_back(R);
+        }
+        else if(stoi(tipo)==3)
+        {
+            Recurso R(id, Tipo::AULA);
+            R.set_aforo(stoi(aux));
+            recursos_.push_back(R);
+        }
+        else
+        {
+            std::cout<<"Error"<<std::endl;
+            return false;
+        }
+
+	}
+
+
+	input.close();
+
+	return true;
+}
+
+bool Administrador_Recursos::guardarRecursos()
+{
+    std::ofstream input("recursos.txt");
+    input << recursos_.size() << std::endl;
+
+
+    for(Recurso R : recursos_)
+    {
+        
+        input << R.get_id_recurso() << "\n";
+        Tipo tipo = R.get_recurso();
+        switch (tipo)
+        {
+        case Tipo:: CAMARA:
+            input << 1 << std::endl;
+            input << R.get_calidad_imagen()<< std::endl;
+            break;
+        case Tipo:: PROYECTOR:
+            input << 2 << std::endl;
+            input << R.get_brillo()<< std::endl;
+            break;
+        case Tipo:: AULA:
+            input << 3 << std::endl;
+            input << R.get_aforo() << std::endl;
+        }
+        
+    }
+    
+    input.close();
+
+    return true;
+}

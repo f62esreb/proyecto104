@@ -4,23 +4,36 @@
 #include<string>
 #include<list>
 
+enum class Tipo{
+    CAMARA = 1,
+    PROYECTOR = 2,
+    AULA = 3
+};
+
 class Recurso{
 
-	private:
-		std::string id_recurso_,nombre_recurso_;
-		std::list<std::string> lista_recursos_;
-	public:
+    private:
+    std::string id_;
+    Tipo recurso_;
+    int calidad_imagen_, brillo_,aforo_;
 
-		Recurso(std::string id_recurso, std::string nombre_recurso);
+    public:
+    Recurso(std::string id, Tipo recurso, int calidad_imagen=0, int brillo=0, int aforo=0){id_=id; recurso_=recurso;};
 
+    inline Tipo get_recurso(){return recurso_;};
+    inline void set_recurso(Tipo recurso){recurso_=recurso;};
 
-		inline std::string get_id(){return id_recurso_;};
-		inline void set_id(std::string id_recurso){id_recurso_=id_recurso;};
+    inline int get_calidad_imagen(){return calidad_imagen_;};
+    inline void set_calidad_imagen(int calidad_imagen){calidad_imagen_=calidad_imagen;};
 
-		inline std::string get_nombre(){return nombre_recurso_;};
-		inline void set_nombre(std::string nombre_recurso){nombre_recurso_=nombre_recurso;};
+    inline int get_brillo(){return brillo_;};
+    inline void set_brillo(int brillo){brillo_=brillo;};
 
-		bool crearRecurso(std::string id_recurso);
+    inline int get_aforo(){return aforo_;};
+    inline void set_aforo(int aforo){aforo_=aforo;};
+
+	inline std::string get_id_recurso(){return id_;};
+
 };
 
 

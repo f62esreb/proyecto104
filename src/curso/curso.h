@@ -44,6 +44,11 @@ class Curso {
         bool quitarInscripcion(std::string id_usuario);
         bool cargarListaParticipantes();
         bool guardarListaParticipantes();
+        bool addRecurso(Recurso R);
+        Recurso quitarRecurso(std::string id);
+        inline std::list<Recurso> verRecursos() {return recursos_; };
+        bool cargarListaRecursos();
+        bool guardarListaRecursos();
 };
 
 
