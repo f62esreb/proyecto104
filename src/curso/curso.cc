@@ -46,19 +46,24 @@ bool Curso::quitarInscripcion(std::string id_usuario) {
 
 bool Curso::cargarListaParticipantes() { 
 	std::ifstream input("curso_" + id_ + ".txt");
+    std::string numero;
 
     if (!input.is_open()) {
         std::ofstream input("curso_" + id_ + ".txt");
 		input.close();
+        this->guardarListaParticipantes();
 		return false;
 	}
 
     if (input.peek() == 0) {
 		input.close();
+        this->guardarListaParticipantes();
         return false;
     }
 
-	while (!input.eof()) {
+    getline(input, numero);
+
+	for (int i = 0; i < std::stoi(numero); i++) {
 		std::string id;
 		getline(input, id);
         if (id.size() > 0) {
@@ -74,6 +79,7 @@ bool Curso::cargarListaParticipantes() {
 bool Curso::guardarListaParticipantes()
 {
     std::ofstream input("curso_"+ id_ +".txt");
+    input << id_participantes_.size() << std::endl;
 
     for(std::string id : id_participantes_)
     {

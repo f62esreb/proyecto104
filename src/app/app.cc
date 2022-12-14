@@ -33,19 +33,24 @@ Lista_Cursos inicializarCursos() {
     Lista_Cursos L;
 
     std::ifstream input("cursos.txt");
+    std::string numero;
 
     if (!input.is_open()) {
         std::ofstream input("cursos.txt");
         input.close();
+        L.guardarCursos();
         return L;
     }
 
     if (input.peek() == 0) {
         input.close();
+        L.guardarCursos();
         return L;
     }
 
-    while (!input.eof()) {
+    getline(input, numero);
+
+    for (int i = 0; i < std::stoi(numero); i++) {
         struct tm timet_inicio;
         struct tm timet_fin;
 
@@ -67,7 +72,7 @@ Lista_Cursos inicializarCursos() {
         getline(input, max_participantes);
         getline(input, dummy);
 
-        Curso c(id, nombre, descripcion, crearFecha(fecha_inicio), crearFecha(fecha_fin), correo_admin_curso, ponentes, requisitos, std::stoi(participantes), std::stoi(max_participantes));
+        Curso c(id, nombre, descripcion, stoi(fecha_inicio), stoi(fecha_fin), correo_admin_curso, ponentes, requisitos, std::stoi(participantes), std::stoi(max_participantes));
         c.cargarListaParticipantes();
         L.addCurso(c);
     }
@@ -82,18 +87,24 @@ Lista_Usuarios inicializarUsuarios()
     Lista_Usuarios L;
 
     std::ifstream input("usuarios.txt");
+    std::string numero;
 
     if (!input.is_open()) {      
         std::ofstream input("usuarios.txt");
         input.close();
+        L.guardarUsuarios();
+        return L;
         }
 
     if (input.peek() == std::ifstream::traits_type::eof()) {
         input.close();
+        L.guardarUsuarios();
         return L;
     }
 
-    while (!input.eof()) {
+    getline(input, numero);
+
+    for (int i = 0; i < stoi(numero); i++) {
         std::string id_usuario, nombre, password, correo;
         std::string dummy;
 

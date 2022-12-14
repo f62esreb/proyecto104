@@ -3,6 +3,7 @@
 
 #include <string>
 #include <list>
+#include "../recurso/recurso.h"
 
 class Curso {
     private:

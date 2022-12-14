@@ -22,19 +22,24 @@ bool Usuario::inscribirseCurso(std::string id_curso){
 
 bool Usuario::cargarCursos() { 
 	std::ifstream input("usuario_" + id_usuario_ + ".txt");
+	std::string numero;
 
     if (!input.is_open()) {
         std::ofstream input("usuario_" + id_usuario_ + ".txt");
 		input.close();
+		this->guardarCursos();
 		return false;
 	}
 
     if (input.peek() == 0) {
 		input.close();
+		this->guardarCursos();
         return false;
     }
 
-	while (!input.eof()) {
+	getline(input, numero);
+
+	for (int i = 0; i < std::stoi(numero); i++) {
 		std::string id;
 		getline(input, id);
 		if (id.size() > 0) {
@@ -52,6 +57,7 @@ bool Usuario::guardarCursos()
 {
 	std::ofstream input("usuario_" + id_usuario_ + ".txt");
 
+	input << lista_cursos_.size() << std::endl;
 	for(std::string id : lista_cursos_)
 	{
 		input << id << "\n";

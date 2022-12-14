@@ -48,6 +48,7 @@ int main() {
 
         if ( login.get_tipo_admin() != "none" ) {
             std::cout << "Bienvenido administrador cualquiera" << std::endl;
+            cursos.guardarCursos();
             login.cerrarSesion();
         } else if ( login.get_id_usuario() != "empty" ) {
             Usuario& usuario = usuarios.verUsuario(login.get_id_usuario());

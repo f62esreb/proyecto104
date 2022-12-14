@@ -38,6 +38,7 @@ bool Lista_Usuarios::modificarUsuario(std::string id, Usuario usuario) {
 bool Lista_Usuarios :: guardarUsuarios()
 {
     std::ofstream input("usuarios.txt");
+    input << lista_usuarios_.size();
 
     for ( Usuario u : lista_usuarios_ ) 
     {

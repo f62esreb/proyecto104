@@ -54,6 +54,8 @@ bool Lista_Cursos :: guardarCursos()
 {
     std::ofstream input("cursos.txt");
 
+    input << lista_cursos_.size() << "\n";
+
     for ( Curso c : lista_cursos_ ) 
     {
         input << c.get_id()<< "\n";
