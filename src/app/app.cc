@@ -161,20 +161,25 @@ void mostrarUsuarios(Lista_Usuarios usuarios) {
 }
 
 void menuEstudiante() {
+    std::cout << "----------------------------------------------" << std::endl;
     std::cout << "1. Ver los cursos disponibles" << std::endl;
     std::cout << "2. Ver un curso en especifico" << std::endl;
     std::cout << "3. Inscribirse en el curso" << std::endl;
     std::cout << "4. Ver mi perfil" << std::endl;
     std::cout << "5. Cerrar sesion" << std::endl;
+    std::cout << "----------------------------------------------" << std::endl;
 }
 
 void menuPrincipal() {
+    std::cout << "----------------------------------------------" << std::endl;
     std::cout << "1. Ver cursos disponibles" << std::endl;
     std::cout << "2. Iniciar sesion" << std::endl;
     std::cout << "3. Cerrar aplicacion" << std::endl;
+    std::cout << "----------------------------------------------" << std::endl;
 }
 
 void menuAdminRecursos() {
+    std::cout << "----------------------------------------------" << std::endl;
     std::cout << "1. Ver cursos disponibles" << std::endl;
     std::cout << "2. Ver recursos disponibles" << std::endl;
     std::cout << "3. Ver recursos asignados a un curso" << std::endl;
@@ -183,17 +188,21 @@ void menuAdminRecursos() {
     std::cout << "6. Asignar recurso a un curso" << std::endl;
     std::cout << "7. Quitar recurso a un curso" << std::endl;
     std::cout << "8. Cerrar sesion" << std::endl;
+    std::cout << "----------------------------------------------" << std::endl;
 }
 
 void menuAdminCursos(){
+    std::cout << "----------------------------------------------" << std::endl;
     std::cout << "1. Ver cursos disponibles" << std::endl;
     std::cout << "2. Ver un curso especifico" << std::endl;
     std::cout << "3. Añadir curso" << std::endl;
     std::cout << "4. Modificar curso" << std::endl;
     std::cout << "5. Cerrar sesion" << std::endl;
+    std::cout << "----------------------------------------------" << std::endl;
 }
 
 void menuAdminApp(){
+    std::cout << "----------------------------------------------" << std::endl;
     std::cout<<"1. Ver Usuarios."<<std::endl;
     std::cout<<"2. Ver Usuario."<<std::endl;
     std::cout<<"3. Hacer Administrador."<<std::endl;
@@ -206,6 +215,7 @@ void menuAdminApp(){
     std::cout<<"10. Quitar Curso."<<std::endl;
     std::cout<<"11. Modificar Curso."<<std::endl;
     std::cout<<"12. Cerrar sesion."<<std::endl;
+    std::cout << "----------------------------------------------" << std::endl;
 }
 
 void mostrarRecursos(Administrador_Recursos admin_recursos) {
