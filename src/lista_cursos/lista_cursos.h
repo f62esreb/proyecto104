@@ -15,7 +15,7 @@ class Lista_Cursos {
         inline std::list<Curso> verCursos() { return lista_cursos_; };
         Curso & verCurso(std::string id);
         bool addCurso(Curso curso);
-        bool quitarCurso(Curso curso);
+        bool quitarCurso(std::string id);
         bool modificarCurso(std::string id, Curso curso);
         bool guardarCursos();
         bool inscripcion(std::string id, std::string id_usuario);

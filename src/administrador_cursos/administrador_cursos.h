@@ -12,11 +12,12 @@ class Administrador_Cursos: public Usuario {
         Lista_Cursos &cursos_;
     public:
         Administrador_Cursos(Lista_Cursos &cursos): cursos_(cursos), Usuario("admin_cursos", "admin_cursos", "admin_cursos", "admin_cursos@uco.es") {this->cargarAdministrador(); };
+        
         bool cargarAdministrador();
         
-        //inline bool addCurso(Curso c) { return cursos_.addCurso(c); };
-        //inline bool quitarCurso(Curso c) { return cursos_.quitarCurso(c); };
-        //inline bool modificarCurso(Curso c, std::string id) { cursos_.modificarCurso(id, c); };
+        inline bool addCurso(Curso c) { return cursos_.addCurso(c); };
+
+        inline bool modificarCurso(Curso c, std::string id) { cursos_.modificarCurso(id, c); };
 };
 
 #endif

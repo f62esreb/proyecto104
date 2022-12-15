@@ -85,11 +85,120 @@ int main() {
                     break;
 
                 default:
-                    std::cout << "Error, introduce una opcion valida" << std::endl;
+                    std::cout << "Error, introduce una opcion valida." << std::endl;
                     break;
             }
 
-        } else if ( login.get_id_usuario() != "empty" ) {
+        } 
+
+        else if ( login.get_id_usuario()=="cursos" ) {
+            std::cout << "Bienvenido administrador de cursos..." << std::endl;
+            menuAdminCursos();
+            std::cin >> option; 
+            
+            std::string id;
+
+            switch(option){
+                case 1:
+                    mostrarCursos(cursos);
+                    break;
+
+                case 2:
+                    std::cout << "Introduce el ID del curso a continuación: ";
+                    std::cin >> id;
+                    mostrarCurso(cursos.verCurso(id));
+                    break;
+
+                case 3:
+                    addCursoSistema(admin_cursos);
+                    break;
+                
+                case 4:
+                    modificarCursoSistema(admin_cursos);
+                    break;
+
+                case 5:
+                    login.cerrarSesion();
+                    break;
+
+                default:
+                    std::cout<<"Error, introduce una opcion valida."<<std::endl;
+                    break;
+            }
+
+        }
+
+        else if(login.get_id_usuario()=="aplicacion"){
+            std::cout<<"Bienvenido administrador de la aplicacion..."<<std::endl;
+            menuAdminApp();
+            std::cin>>option;
+            
+            std::string id;
+
+            switch(option){
+                case 1:
+                    mostrarUsuarios(usuarios);
+                    break;
+                
+                case 2:
+                    std::cout<<"Introduce el ID del usuario: ";
+                    std::cin>>id;
+                    mostrarUsuario(usuarios.verUsuario(id));
+                    break;
+                
+                case 3:
+                    hacerAdmin(admin_app, usuarios);
+                    break;
+                
+                case 4:
+                    std::cout<<"Introduce los datos del usuario a continuacion"<<std::endl;
+                    addUsuarioSistema(usuarios);
+                    break;
+                
+                case 5:
+                    std::cout<<"Inserte el ID del usuario que desea quitar: ";
+                    std::cin>>id;
+
+                    eliminarUsuario(admin_app, id);
+                    break;
+                
+                case 6:
+                    modificarUsuario(admin_app);
+                    break;
+                
+                case 7:
+                    mostrarCursos(cursos);
+                    break;
+
+                case 8:
+                    std::cout << "Introduce el ID del curso a continuación: ";
+                    std::cin >> id;
+                    mostrarCurso(cursos.verCurso(id));
+                    break;
+
+                case 9:
+                    addCursoSistema(admin_cursos);
+                    break;
+
+                case 10:
+                    quitarCurso(cursos);
+                    break;
+
+                case 11:
+                    modificarCursoSistema(admin_cursos);
+                    break;
+
+                case 12:
+                    login.cerrarSesion();
+                    break;
+
+                default:
+                    std::cout<<"Error, introduce una opcion valida."<<std::endl;
+                    break; 
+            }
+        }
+
+        else if ( login.get_id_usuario() != "empty" ) {
             Usuario& usuario = usuarios.verUsuario(login.get_id_usuario());
 
             std::cout << "Bienvenido, " << usuario.get_name() << std::endl;

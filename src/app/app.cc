@@ -150,6 +150,16 @@ void mostrarCursos(Lista_Cursos cursos) {
     }
 }
 
+void mostrarUsuarios(Lista_Usuarios usuarios) {
+    for (Usuario u: usuarios.verUsuarios()) {
+        std::cout << "ID del usuario: " << u.get_id_usuario() << std::endl;
+        std::cout << "Nombre: " << u.get_name() << std::endl;
+        std::cout << "Contraseña: " << u.get_password() << std::endl;
+        std::cout << "Correo: "<< u.get_correo() << std::endl;
+        std::cout << "----------------------------------------------" << std::endl;
+    }
+}
+
 void menuEstudiante() {
     std::cout << "1. Ver los cursos disponibles" << std::endl;
     std::cout << "2. Ver un curso en especifico" << std::endl;
@@ -172,6 +182,29 @@ void menuAdminRecursos() {
     std::cout << "6. Asignar recurso a un curso" << std::endl;
     std::cout << "7. Quitar recurso a un curso" << std::endl;
     std::cout << "8. Cerrar sesion" << std::endl;
+}
+
+void menuAdminCursos(){
+    std::cout << "1. Ver cursos disponibles" << std::endl;
+    std::cout << "2. Ver un curso especifico" << std::endl;
+    std::cout << "2. Añadir curso" << std::endl;
+    std::cout << "3. Modificar curso" << std::endl;
+    std::cout << "4. Cerrar sesion" << std::endl;
+}
+
+void menuAdminApp(){
+    std::cout<<"1. Ver Usuarios."<<std::endl;
+    std::cout<<"2. Ver Usuario."<<std::endl;
+    std::cout<<"3. Hacer Administrador."<<std::endl;
+    std::cout<<"4. Añadir Usuario."<<std::endl;
+    std::cout<<"5. Quitar Usuario."<<std::endl;
+    std::cout<<"6. Modificar Usuario."<<std::endl;
+    std::cout<<"7. Ver Cursos."<<std::endl;
+    std::cout<<"8. Ver Curso."<<std::endl;
+    std::cout<<"9. Añadir Curso."<<std::endl;
+    std::cout<<"10. Quitar Curso."<<std::endl;
+    std::cout<<"11. Modificar Curso."<<std::endl;
+    std::cout<<"12. Cerrar sesion."<<std::endl;
 }
 
 void mostrarRecursos(Administrador_Recursos admin_recursos) {
@@ -310,4 +343,140 @@ void quitarRecursoCurso(Administrador_Recursos& admin_recursos) {
     if(admin_recursos.quitarRecurso(id_curso, id_recurso)==false){
         std::cout << "Algo extraño pasaba en esta linea de C++" << std::endl;
     }
+}
+
+ Curso insertarDatosCurso(){
+    std::string id, nombre, descripcion, correo_admin_curso, ponentes, requisitos, fechainicio, fechafin;
+    int max_participantes;
+    float precio;
+    time_t fecha_inicio, fecha_fin;
+
+
+    std::cout<<"Introduce el ID del curso: ";
+    std::cin>>id;
+
+    std::cout<<"Introduce el nombre del curso: ";
+    std::cin>>nombre;
+
+    std::cout<<"Introduce una descripción para el curso: ";
+    std::cin>>descripcion;
+
+    std::cout<<"Introduce el correo del administrador del curso: ";
+    std::cin>>correo_admin_curso;
+
+    std::cout<<"Introduce el nombre de los ponentes del curso: ";
+    std::cin>>ponentes;
+
+    std::cout<<"Introduce los requisitos necesarios: ";
+    std::cin>>requisitos;
+
+    std::cout<<"Introduce la fecha de inicio con formato DD-MM-AAAA: ";
+    std::cin>>fechainicio;
+    fecha_inicio=crearFecha(fechainicio);
+
+    std::cout<<"Introduce la fecha de finalizacion con formato DD-MM-AAAA: ";
+    std::cin>>fechafin;
+    fecha_fin=crearFecha(fechafin);
+
+    std::cout<<"Introduce el aforo del curso: ";
+    std::cin>>max_participantes;
+
+    std::cout<<"Introduce el precio del curso: ";
+    std::cin>>precio;
+
+    Curso c(id,nombre,descripcion, fecha_inicio, fecha_fin, correo_admin_curso, ponentes, requisitos, max_participantes, precio);
+
+    return c;
+
+}
+
+void addCursoSistema(Administrador_Cursos& admin_cursos){
+    Curso C=insertarDatosCurso();
+
+    admin_cursos.addCurso(C);
+
+}
+
+void modificarCursoSistema(Administrador_Cursos& admin_cursos){
+    std::string id_curso_viejo;
+
+    std::cout<<"Introduzca el ID del curso que desea modificar: ";
+    std::cin>>id_curso_viejo;
+
+    std::cout<<"A continuacion, introduzca los nuevos datos para el curso que desea modificar."<<std::endl;
+    
+    Curso C=insertarDatosCurso();
+
+    admin_cursos.modificarCurso(C, id_curso_viejo);
+
+
+}
+
+void mostrarUsuario(Usuario u) {
+    std::cout << "ID del usuario: " << u.get_id_usuario() << std::endl;
+    std::cout << "Nombre: " << u.get_name() << std::endl;
+    std::cout << "Contraseña: " << u.get_password() << std::endl;
+    std::cout << "Correo: "<< u.get_correo() << std::endl;
+}
+
+void hacerAdmin(Administrador_Aplicacion& admin_app, Lista_Usuarios usuarios){
+    std::string id;
+    std::cout<<"Introduce el ID del usuario: ";
+    std::cin>>id;
+
+    admin_app.hacerAdministrador(usuarios.verUsuario(id));
+}
+
+Usuario insertarDatosUsuario(){
+    std::string id, nombre, password, correo;
+
+
+    std::cout<<"Introduce el ID del usuario: ";
+    std::cin>>id;
+
+    std::cout<<"Introduce el nombre del usuario: ";
+    std::cin>>nombre;
+
+    std::cout<<"Introduce la contraseña del usuario: ";
+    std::cin>>password;
+
+    std::cout<<"Introduce el correo del usuario: ";
+    std::cin>>correo;
+
+    Usuario u(id,nombre,password,correo);
+
+    return u;
+
+}
+
+void addUsuarioSistema(Lista_Usuarios usuarios){
+    Usuario u=insertarDatosUsuario();
+    usuarios.addUsuario(u);
+
+}
+
+void eliminarUsuario(Administrador_Aplicacion& admin_app, std::string id){
+    
+    admin_app.borrarUsuario(id);
+}
+
+void modificarUsuario(Administrador_Aplicacion& admin_app){
+    std::string id_usuario_viejo;
+
+    std::cout<<"Introduzca el ID del usuairo que desea modificar: ";
+    std::cin>>id_usuario_viejo;
+
+    std::cout<<"A continuacion, introduzca los nuevos datos del usuario"<<std::endl;
+    Usuario nuevo=insertarDatosUsuario();
+
+    admin_app.modificarUsuario(id_usuario_viejo,nuevo);
+}
+
+void quitarCurso(Lista_Cursos cursos){
+    std::string id;
+    
+    std::cout<<"Inserte el ID del curso: ";
+    std::cin>>id;
+
+    cursos.quitarCurso(id);
 }

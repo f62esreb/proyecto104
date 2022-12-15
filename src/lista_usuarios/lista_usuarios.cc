@@ -23,10 +23,10 @@ bool Lista_Usuarios::addUsuario(Usuario usuario) {
 }
 
 
-bool Lista_Usuarios::modificarUsuario(std::string id, Usuario usuario) {
+bool Lista_Usuarios::modificarUsuario(std::string id, Usuario nuevo_usuario) {
     for ( auto it = lista_usuarios_.begin(); it != lista_usuarios_.end(); it++ ) {
         if ( it->get_id_usuario() == id ) { 
-            *it = usuario;
+            *it = nuevo_usuario;
             return true;
         }
     }
@@ -71,3 +71,14 @@ bool Lista_Usuarios::inscripcionUsuario(std::string id_usuario, std::string id){
     return false;
 }
 
+bool Lista_Usuarios::deleteUsuario(std::string id_usuario){
+
+    for(auto it=lista_usuarios_.begin();it!=lista_usuarios_.end();it++){
+        if(it->get_id_usuario()==id_usuario){
+            it=lista_usuarios_.erase(it);
+            return true;
+        }
+    }
+
+    return false;
+}

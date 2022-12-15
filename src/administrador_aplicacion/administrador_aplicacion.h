@@ -18,7 +18,8 @@ class Administrador_Aplicacion: public Usuario {
         bool cargarAdministrador();
 
         bool hacerAdministrador(Usuario usuario);
-        bool modificarUsuario(Usuario usuario, Usuario nuevo_usuario);
+        inline bool modificarUsuario(std::string id, Usuario nuevo_usuario){return usuarios_.modificarUsuario(id,nuevo_usuario);};
+        inline bool borrarUsuario(std::string id){return usuarios_.deleteUsuario(id);};
 };
 
 #endif

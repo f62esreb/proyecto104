@@ -42,3 +42,4 @@ bool Administrador_Aplicacion::hacerAdministrador(Usuario usuario) {
 
     return true;
 }
+

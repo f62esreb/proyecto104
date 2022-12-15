@@ -22,9 +22,9 @@ bool Lista_Cursos::addCurso(Curso curso) {
     return true;
 }
 
-bool Lista_Cursos::quitarCurso(Curso curso) {
+bool Lista_Cursos::quitarCurso(std::string id) {
     for ( auto it = lista_cursos_.begin(); it != lista_cursos_.end(); it++ ) {
-        if ( it->get_id() == curso.get_id() ) { 
+        if ( it->get_id() == id ) { 
             it = lista_cursos_.erase(it);
             this->guardarCursos();
             
