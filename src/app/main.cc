@@ -22,6 +22,7 @@ int main() {
             menuPrincipal();
             std::cout << "Introduce una opcion" << std::endl;
             std::cin >> option;
+            std::cout << "-----------------------------------------------------------" << std::endl;
 
             switch (option) {
                 case 1:
@@ -38,6 +39,7 @@ int main() {
                     std::cin >> dni;
                     std::cout << "Contraseña> ";
                     std::cin >> pass;
+                    std::cout << "-----------------------------------------------------------" << std::endl;
 
 
                     if (! login.iniciarSesion(dni, pass)) {
