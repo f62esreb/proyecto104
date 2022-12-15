@@ -77,7 +77,7 @@ Lista_Cursos inicializarCursos() {
         Curso c(id, nombre, descripcion, stoi(fecha_inicio), stoi(fecha_fin), correo_admin_curso, ponentes, requisitos, std::stoi(participantes), std::stoi(max_participantes), std::stof(precio));
         c.cargarListaParticipantes();
         c.cargarListaRecursos();
-        L.addCurso(c);
+        L.loadCurso(c);
     }
 
     input.close();
@@ -119,7 +119,7 @@ Lista_Usuarios inicializarUsuarios()
     
         Usuario c(id_usuario, nombre, password, correo);
         c.cargarCursos();
-        L.addUsuario(c);
+        L.loadUsuario(c);
     }
     
     input.close();
@@ -171,6 +171,7 @@ void menuEstudiante() {
 void menuPrincipal() {
     std::cout << "1. Ver cursos disponibles" << std::endl;
     std::cout << "2. Iniciar sesion" << std::endl;
+    std::cout << "3. Cerrar aplicacion" << std::endl;
 }
 
 void menuAdminRecursos() {
@@ -187,9 +188,9 @@ void menuAdminRecursos() {
 void menuAdminCursos(){
     std::cout << "1. Ver cursos disponibles" << std::endl;
     std::cout << "2. Ver un curso especifico" << std::endl;
-    std::cout << "2. Añadir curso" << std::endl;
-    std::cout << "3. Modificar curso" << std::endl;
-    std::cout << "4. Cerrar sesion" << std::endl;
+    std::cout << "3. Añadir curso" << std::endl;
+    std::cout << "4. Modificar curso" << std::endl;
+    std::cout << "5. Cerrar sesion" << std::endl;
 }
 
 void menuAdminApp(){
@@ -350,41 +351,42 @@ void quitarRecursoCurso(Administrador_Recursos& admin_recursos) {
     int max_participantes;
     float precio;
     time_t fecha_inicio, fecha_fin;
-
+    std::cin.get();
 
     std::cout<<"Introduce el ID del curso: ";
-    std::cin>>id;
+    getline(std::cin, id);
 
     std::cout<<"Introduce el nombre del curso: ";
-    std::cin>>nombre;
+    getline(std::cin, nombre);    
 
     std::cout<<"Introduce una descripción para el curso: ";
-    std::cin>>descripcion;
+    getline(std::cin, descripcion);
 
     std::cout<<"Introduce el correo del administrador del curso: ";
-    std::cin>>correo_admin_curso;
+    getline(std::cin, correo_admin_curso);
 
-    std::cout<<"Introduce el nombre de los ponentes del curso: ";
-    std::cin>>ponentes;
+    std::cout<<"Introduce el nombre de los ponentes del curso (separados por comas): ";
+    getline(std::cin, ponentes);
 
     std::cout<<"Introduce los requisitos necesarios: ";
-    std::cin>>requisitos;
+    getline(std::cin, requisitos);
 
     std::cout<<"Introduce la fecha de inicio con formato DD-MM-AAAA: ";
-    std::cin>>fechainicio;
+    getline(std::cin, fechainicio);
     fecha_inicio=crearFecha(fechainicio);
 
     std::cout<<"Introduce la fecha de finalizacion con formato DD-MM-AAAA: ";
-    std::cin>>fechafin;
+    getline(std::cin, fechafin);
     fecha_fin=crearFecha(fechafin);
 
     std::cout<<"Introduce el aforo del curso: ";
-    std::cin>>max_participantes;
+    std::cin >> max_participantes;
 
     std::cout<<"Introduce el precio del curso: ";
     std::cin>>precio;
+    std::cin.get();
 
-    Curso c(id,nombre,descripcion, fecha_inicio, fecha_fin, correo_admin_curso, ponentes, requisitos, max_participantes, precio);
+    Curso c(id,nombre,descripcion, fecha_inicio, fecha_fin, correo_admin_curso, ponentes, requisitos, 0, max_participantes, precio);
 
     return c;
 
@@ -393,7 +395,11 @@ void quitarRecursoCurso(Administrador_Recursos& admin_recursos) {
 void addCursoSistema(Administrador_Cursos& admin_cursos){
     Curso C=insertarDatosCurso();
 
-    admin_cursos.addCurso(C);
+    if (admin_cursos.addCurso(C)) {
+        std::cout << "Curso añadido correctamente" << std::endl;
+    } else {
+        std::cout << "Error añadiendo curso." << std::endl;
+    }
 
 }
 
@@ -419,29 +425,72 @@ void mostrarUsuario(Usuario u) {
     std::cout << "Correo: "<< u.get_correo() << std::endl;
 }
 
-void hacerAdmin(Administrador_Aplicacion& admin_app, Lista_Usuarios usuarios){
-    std::string id;
-    std::cout<<"Introduce el ID del usuario: ";
-    std::cin>>id;
+void hacerAdmin(Administrador_Aplicacion& admin_app, Administrador_Recursos& admin_recursos, Administrador_Cursos& admin_cursos, Lista_Usuarios& usuarios){
+    std::string user;
+    int admin;
 
-    admin_app.hacerAdministrador(usuarios.verUsuario(id));
+    std::cout << "1. Modificar el usuario del administrador de cursos." << std::endl;
+    std::cout << "2. Modificar el usuario del administrador de recursos." << std::endl;
+    std::cout << "3. Modificar el usuario del administrador de la aplicacion." << std::endl;
+    std::cout << "> ";
+    std::cin >> admin;
+
+    std::cout << "Introduce el id del usuario> ";
+    std::cin >> user;
+
+    Usuario u = usuarios.verUsuario(user);
+
+    switch (admin) {
+        case 1:
+            admin_cursos.set_id_usuario(u.get_id_usuario());
+            admin_cursos.set_name(u.get_name());
+            admin_cursos.set_password(u.get_password());
+            admin_cursos.set_correo(u.get_correo());
+            usuarios.deleteUsuario(u.get_id_usuario());
+            std::cout << "Establecido el usuario " << u.get_id_usuario() << " como administrador de cursos" << std::endl;
+            admin_cursos.guardarAdministrador();
+            break;
+        case 2:
+            admin_recursos.set_id_usuario(u.get_id_usuario());
+            admin_recursos.set_name(u.get_name());
+            admin_recursos.set_password(u.get_password());
+            admin_recursos.set_correo(u.get_correo());
+            usuarios.deleteUsuario(u.get_id_usuario());
+            std::cout << "Establecido el usuario " << u.get_id_usuario() << " como administrador de recursos" << std::endl;
+            admin_cursos.guardarAdministrador();
+            break;
+        case 3:
+            admin_app.set_id_usuario(u.get_id_usuario());
+            admin_app.set_name(u.get_name());
+            admin_app.set_password(u.get_password());
+            admin_app.set_correo(u.get_correo());
+            usuarios.deleteUsuario(u.get_id_usuario());
+            std::cout << "Establecido el usuario " << u.get_id_usuario() << " como administrador de la aplicacion" << std::endl;
+            admin_cursos.guardarAdministrador();
+            break;
+        default:
+            std::cout << "Error, el numero introducido es invalido." << std::endl;
+            break;
+    }
+
+
 }
 
 Usuario insertarDatosUsuario(){
     std::string id, nombre, password, correo;
 
-
+    std::cin.get();
     std::cout<<"Introduce el ID del usuario: ";
-    std::cin>>id;
+    getline(std::cin, id);
 
     std::cout<<"Introduce el nombre del usuario: ";
-    std::cin>>nombre;
+    getline(std::cin, nombre);
 
     std::cout<<"Introduce la contraseña del usuario: ";
-    std::cin>>password;
+    getline(std::cin, password);
 
     std::cout<<"Introduce el correo del usuario: ";
-    std::cin>>correo;
+    getline(std::cin, correo);
 
     Usuario u(id,nombre,password,correo);
 
@@ -449,7 +498,7 @@ Usuario insertarDatosUsuario(){
 
 }
 
-void addUsuarioSistema(Lista_Usuarios usuarios){
+void addUsuarioSistema(Lista_Usuarios& usuarios){
     Usuario u=insertarDatosUsuario();
     usuarios.addUsuario(u);
 
@@ -472,7 +521,7 @@ void modificarUsuario(Administrador_Aplicacion& admin_app){
     admin_app.modificarUsuario(id_usuario_viejo,nuevo);
 }
 
-void quitarCurso(Lista_Cursos cursos){
+void quitarCurso(Lista_Cursos& cursos){
     std::string id;
     
     std::cout<<"Inserte el ID del curso: ";

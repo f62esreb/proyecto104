@@ -14,6 +14,7 @@ class Lista_Cursos {
         Lista_Cursos() : empty("none", "none", "none", 0, 0, "none", "none", "none", 0, 0, 0) {};
         inline std::list<Curso> verCursos() { return lista_cursos_; };
         Curso & verCurso(std::string id);
+        bool loadCurso(Curso curso);
         bool addCurso(Curso curso);
         bool quitarCurso(std::string id);
         bool modificarCurso(std::string id, Curso curso);

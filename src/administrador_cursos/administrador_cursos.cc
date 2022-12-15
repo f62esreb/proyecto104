@@ -32,3 +32,18 @@ bool Administrador_Cursos::cargarAdministrador() {
 
     return true;
 }
+
+
+bool Administrador_Cursos::guardarAdministrador()
+{
+	std::ofstream input("admin_cursos.txt");
+
+    input << this->get_id_usuario() << std::endl;
+    input << this->get_name() << std::endl;
+    input << this->get_password() << std::endl;
+    input << this->get_correo() << std::endl;
+
+	input.close();
+
+    return true;
+}

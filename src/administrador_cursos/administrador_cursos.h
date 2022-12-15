@@ -17,7 +17,9 @@ class Administrador_Cursos: public Usuario {
         
         inline bool addCurso(Curso c) { return cursos_.addCurso(c); };
 
-        inline bool modificarCurso(Curso c, std::string id) { cursos_.modificarCurso(id, c); };
+        inline bool modificarCurso(Curso c, std::string id) { return cursos_.modificarCurso(id, c); };
+
+        bool guardarAdministrador();
 };
 
 #endif

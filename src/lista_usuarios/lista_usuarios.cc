@@ -11,6 +11,17 @@ Usuario& Lista_Usuarios::verUsuario(std::string id)
     return u;
 }
 
+bool Lista_Usuarios::loadUsuario(Usuario usuario) {
+    for ( Usuario c : lista_usuarios_ ) {
+        if ( c.get_id_usuario() == usuario.get_id_usuario() ) { 
+            return false;
+        }
+    }
+
+    lista_usuarios_.push_back(usuario);
+    return true;
+}
+
 bool Lista_Usuarios::addUsuario(Usuario usuario) {
     for ( Usuario c : lista_usuarios_ ) {
         if ( c.get_id_usuario() == usuario.get_id_usuario() ) { 
@@ -19,6 +30,7 @@ bool Lista_Usuarios::addUsuario(Usuario usuario) {
     }
 
     lista_usuarios_.push_back(usuario);
+    this->guardarUsuarios();
     return true;
 }
 
@@ -38,7 +50,7 @@ bool Lista_Usuarios::modificarUsuario(std::string id, Usuario nuevo_usuario) {
 bool Lista_Usuarios :: guardarUsuarios()
 {
     std::ofstream input("usuarios.txt");
-    input << lista_usuarios_.size();
+    input << lista_usuarios_.size() << std::endl;
 
     for ( Usuario u : lista_usuarios_ ) 
     {

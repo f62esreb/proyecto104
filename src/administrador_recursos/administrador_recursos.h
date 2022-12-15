@@ -23,6 +23,7 @@ class Administrador_Recursos: public Usuario {
         bool quitarRecurso_Sistema(std::string id);
         bool cargarRecursos();
         bool guardarRecursos();
+        bool guardarAdministrador();
 };
 
 #endif

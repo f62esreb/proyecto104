@@ -17,9 +17,9 @@ class Administrador_Aplicacion: public Usuario {
         Administrador_Aplicacion(Lista_Cursos &cursos, Lista_Usuarios &usuarios): Usuario("admin", "admin", "admin", "admin"), cursos_(cursos), usuarios_(usuarios) {this->cargarAdministrador(); };
         bool cargarAdministrador();
 
-        bool hacerAdministrador(Usuario usuario);
         inline bool modificarUsuario(std::string id, Usuario nuevo_usuario){return usuarios_.modificarUsuario(id,nuevo_usuario);};
         inline bool borrarUsuario(std::string id){return usuarios_.deleteUsuario(id);};
+        bool guardarAdministrador();
 };
 
 #endif

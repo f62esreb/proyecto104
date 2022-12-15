@@ -32,17 +32,23 @@ int main() {
                     std::cout << "-----------------------------------------------------------" << std::endl;
                     break;
                 case 2:
-                        std::cout << "-- SISTEMA DE CURSOS DE EXTENSIÓN DE LA UNIVERSIDAD DE CÓRDOBA --" << std::endl;
-                        std::cout << "-- INICIO DE SESIÓN ---------------------------------------------" << std::endl;
-                        std::cout << "DNI/NIF> ";
-                        std::cin >> dni;
-                        std::cout << "Contraseña> ";
-                        std::cin >> pass;
+                    std::cout << "-- SISTEMA DE CURSOS DE EXTENSIÓN DE LA UNIVERSIDAD DE CÓRDOBA --" << std::endl;
+                    std::cout << "-- INICIO DE SESIÓN ---------------------------------------------" << std::endl;
+                    std::cout << "DNI/NIF> ";
+                    std::cin >> dni;
+                    std::cout << "Contraseña> ";
+                    std::cin >> pass;
 
 
-                        if (! login.iniciarSesion(dni, pass)) {
-                            std::cout << "Error: usuario o contrasena invalidos" << std::endl;
-                        }
+                    if (! login.iniciarSesion(dni, pass)) {
+                        std::cout << "Error: usuario o contrasena invalidos" << std::endl;
+                    }
+                    break;
+                case 3:
+                    return 0;
+                    break;
+                default:
+                    std::cout << "Error: opcion invalida" << std::endl;
                     break;
             }
         }
@@ -91,7 +97,7 @@ int main() {
 
         } 
 
-        else if ( login.get_id_usuario()=="cursos" ) {
+        else if ( login.get_tipo_admin()=="cursos" ) {
             std::cout << "Bienvenido administrador de cursos..." << std::endl;
             menuAdminCursos();
             std::cin >> option; 
@@ -128,7 +134,7 @@ int main() {
 
         }
 
-        else if(login.get_id_usuario()=="aplicacion"){
+        else if(login.get_tipo_admin()=="aplicacion"){
             std::cout<<"Bienvenido administrador de la aplicacion..."<<std::endl;
             menuAdminApp();
             std::cin>>option;
@@ -147,7 +153,7 @@ int main() {
                     break;
                 
                 case 3:
-                    hacerAdmin(admin_app, usuarios);
+                    hacerAdmin(admin_app, admin_recursos, admin_cursos, usuarios);
                     break;
                 
                 case 4:

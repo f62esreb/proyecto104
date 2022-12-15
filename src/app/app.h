@@ -31,10 +31,10 @@ void addRecursoCurso(Administrador_Recursos& admin_recursos, Lista_Cursos& curso
 void quitarRecursoCurso(Administrador_Recursos& admin_recursos);
 void addCursoSistema(Administrador_Cursos& admin_cursos);
 void modificarCursoSistema(Administrador_Cursos& admin_cursos);
-void hacerAdmin(Administrador_Aplicacion& admin_app, Lista_Usuarios usuarios);
-void addUsuarioSistema(Lista_Usuarios usuarios);
+void hacerAdmin(Administrador_Aplicacion& admin_app, Administrador_Recursos& admin_recursos, Administrador_Cursos& admin_cursos, Lista_Usuarios& usuarios);
+void addUsuarioSistema(Lista_Usuarios& usuarios);
 void eliminarUsuario(Administrador_Aplicacion& admin_app, std::string id);
 void modificarUsuario(Administrador_Aplicacion& admin_app);
-void quitarCurso(Lista_Cursos cursos);
+void quitarCurso(Lista_Cursos& cursos);
 
 #endif

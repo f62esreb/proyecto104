@@ -11,6 +11,17 @@ Curso & Lista_Cursos::verCurso(std::string id) {
     return empty;
 }
 
+bool Lista_Cursos::loadCurso(Curso curso) {
+    for ( Curso c : lista_cursos_ ) {
+        if ( c.get_id() == curso.get_id() ) { 
+            return false;
+        }
+    }
+    
+    lista_cursos_.push_back(curso);
+    return true;
+}
+
 bool Lista_Cursos::addCurso(Curso curso) {
     for ( Curso c : lista_cursos_ ) {
         if ( c.get_id() == curso.get_id() ) { 
@@ -19,6 +30,7 @@ bool Lista_Cursos::addCurso(Curso curso) {
     }
     
     lista_cursos_.push_back(curso);
+    this->guardarCursos();
     return true;
 }
 

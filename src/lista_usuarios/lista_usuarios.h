@@ -17,6 +17,7 @@ class Lista_Usuarios {
         Usuario& verUsuario(std::string id);
         inline std::list<Usuario> verUsuarios() { return lista_usuarios_; };
         bool addUsuario(Usuario usuario);
+        bool loadUsuario(Usuario usuario);
         bool modificarUsuario(std::string id, Usuario usuario);
         bool guardarUsuarios();
         bool inscripcionUsuario(std::string id_usuario, std::string id);

@@ -3,10 +3,10 @@
 #include <fstream>
 
 bool Administrador_Aplicacion::cargarAdministrador() {
-    std::ifstream input("admin_cursos.txt");
+    std::ifstream input("admin.txt");
 
     if (!input.is_open()) {      
-        std::ofstream input("admin_cursos.txt");
+        std::ofstream input("admin.txt");
         std::cout << "Error: no se ha encontrado ningun usuario administrador de la aplicacion, usando por defecto el inicio de sesión con usuario: admin y contraseña: admin. Por favor se recomienda que este sea cambiado inmediatamente para evitar problemas de seguridad." << std::endl;
         input.close();
         return false;
@@ -26,7 +26,10 @@ bool Administrador_Aplicacion::cargarAdministrador() {
         getline(input, password);
         getline(input, correo);
     
-        Usuario(id_usuario, nombre, password, correo);
+        this->set_id_usuario(id_usuario);
+        this->set_name(nombre);
+        this->set_password(password);
+        this->set_correo(correo);
     }
 
     input.close();
@@ -34,11 +37,16 @@ bool Administrador_Aplicacion::cargarAdministrador() {
     return true;
 }
 
-bool Administrador_Aplicacion::hacerAdministrador(Usuario usuario) {
-    this->set_id_usuario(usuario.get_id_usuario());
-    this->set_password(usuario.get_password());
-    this->set_name(usuario.get_name());
-    this->set_correo(usuario.get_correo());
+bool Administrador_Aplicacion::guardarAdministrador()
+{
+	std::ofstream input("admin.txt");
+
+    input << this->get_id_usuario() << std::endl;
+    input << this->get_name() << std::endl;
+    input << this->get_password() << std::endl;
+    input << this->get_correo() << std::endl;
+
+	input.close();
 
     return true;
 }
