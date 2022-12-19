@@ -11,9 +11,9 @@ Para compilar este programa es necesario hacer lo siguiente:
 
 En el directorio raiz del proyecto es necesario ejecutar los siguientes comandos
 
-``mkdir build``
-``cd build`` 
-``cmake ..``
-``make``
+```mkdir build
+cd build
+cmake ..
+make```
 
 Tras compilar el proyecto, el ejecutable se encuentra dentro de la carpeta ``build/src/app`` bajo el nombre ``main``. Al ejecutar main con la terminal el programa se podrá empezar a utilizar.
