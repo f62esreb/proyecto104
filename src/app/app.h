@@ -27,7 +27,7 @@ void mostrarRecursos(Administrador_Recursos admin_recursos);
 void mostrarRecursosCurso(Administrador_Recursos admin_recursos, Lista_Cursos cursos);
 void addRecursoSistema(Administrador_Recursos& admin_recursos);
 void quitarRecursoSistema(Administrador_Recursos& admin_recursos);
-void addRecursoCurso(Administrador_Recursos& admin_recursos, Lista_Cursos& cursos);
+bool addRecursoCurso(Administrador_Recursos& admin_recursos, Lista_Cursos& cursos);
 void quitarRecursoCurso(Administrador_Recursos& admin_recursos);
 void addCursoSistema(Administrador_Cursos& admin_cursos);
 void modificarCursoSistema(Administrador_Cursos& admin_cursos);

@@ -40,7 +40,7 @@ bool Administrador_Recursos::cargarAdministrador() {
     {
         Curso &c = cursos_.verCurso(id);
 
-        if(c.get_id() == "empty"){return false;}
+        if(c.get_id() == "none"){return false;}
 
         this->quitarRecurso_Sistema(R.get_id_recurso());
 
@@ -53,7 +53,7 @@ bool Administrador_Recursos::cargarAdministrador() {
     {
         Curso &c = cursos_.verCurso(id);
 
-        if(c.get_id() == "empty"){return false;}
+        if(c.get_id() == "none"){return false;}
 
         Recurso R = c.quitarRecurso(id_recurso);
 
@@ -66,10 +66,10 @@ bool Administrador_Recursos::cargarAdministrador() {
     bool Administrador_Recursos:: addRecurso_Sistema(Recurso R)
     {
         for ( Recurso c : recursos_ ) {
-        if ( c.get_id_recurso() == R.get_id_recurso() ) { 
-            return false;
+            if ( c.get_id_recurso() == R.get_id_recurso() ) { 
+                return false;
+            }
         }
-    }
     
         recursos_.push_back(R);
         this->guardarRecursos();

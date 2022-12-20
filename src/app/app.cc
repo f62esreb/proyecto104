@@ -128,17 +128,22 @@ Lista_Usuarios inicializarUsuarios()
 }
 
 void mostrarCurso(Curso c) {
-    std::cout << "ID del curso: " << c.get_id() << std::endl;
-    std::cout << "Nombre: " << c.get_nombre() << std::endl;
-    std::cout << "Descripcion: " << c.get_descripcion() << std::endl;
-    time_t time = c.get_fecha_inicio();
-    std::cout << "Fecha inicio de curso: " << std::asctime(localtime(&time));
-    time = c.get_fecha_fin();
-    std::cout << "Fecha fin de curso: " << std::asctime(localtime(&time));
-    std::cout << "Ponentes: " << c.get_ponentes() << std::endl;
-    std::cout << "Participantes: " << c.get_participantes() << std::endl;
-    std::cout << "Max participantes: " << c.get_max_participantes() << std::endl;
-    std::cout << "Para mas informacion pongase en contacto con " << c.get_correo_admin_curso() << std::endl;
+    if (c.get_id() != "none") {
+        std::cout << "ID del curso: " << c.get_id() << std::endl;
+        std::cout << "Nombre: " << c.get_nombre() << std::endl;
+        std::cout << "Descripcion: " << c.get_descripcion() << std::endl;
+        time_t time = c.get_fecha_inicio();
+        std::cout << "Fecha inicio de curso: " << std::asctime(localtime(&time));
+        time = c.get_fecha_fin();
+        std::cout << "Fecha fin de curso: " << std::asctime(localtime(&time));
+        std::cout << "Ponentes: " << c.get_ponentes() << std::endl;
+        std::cout << "Participantes: " << c.get_participantes() << std::endl;
+        std::cout << "Max participantes: " << c.get_max_participantes() << std::endl;
+        std::cout << "Para mas informacion pongase en contacto con " << c.get_correo_admin_curso() << std::endl;
+    } else {
+        std::cout << "Error: no existe el curso." << std::endl;
+    }
+
 }
 
 void mostrarCursos(Lista_Cursos cursos) {
@@ -222,22 +227,26 @@ void mostrarRecursos(Administrador_Recursos admin_recursos) {
     int inc, atributo;
     std::string tipo_recurso;
 
-    std::cout << "Los recursos disponibles en el sistema son:" << std::endl;
-    inc = 0;
-    for ( Recurso R : admin_recursos.verRecursosDisponibles() ){
-        if (R.get_recurso() == Tipo::CAMARA) {
-            tipo_recurso = "Camara con calidad de ";
-            atributo = R.get_calidad_imagen();
-        } else if (R.get_recurso() == Tipo::PROYECTOR) {
-            tipo_recurso = "Proyector con brillo de ";
-            atributo = R.get_brillo();
-        } else if (R.get_recurso() == Tipo::AULA) {
-            tipo_recurso = "Aula con aforo de ";
-            atributo = R.get_aforo();
-        }
+    if (admin_recursos.verRecursosDisponibles().size() < 1) {
+        std::cout << "Error: no hay recursos en el sistema." << std::endl;
+    } else {
+        std::cout << "Los recursos disponibles en el sistema son:" << std::endl;
+        inc = 0;
+        for ( Recurso R : admin_recursos.verRecursosDisponibles() ){
+            if (R.get_recurso() == Tipo::CAMARA) {
+                tipo_recurso = "Camara con calidad de ";
+                atributo = R.get_calidad_imagen();
+            } else if (R.get_recurso() == Tipo::PROYECTOR) {
+                tipo_recurso = "Proyector con brillo de ";
+                atributo = R.get_brillo();
+            } else if (R.get_recurso() == Tipo::AULA) {
+                tipo_recurso = "Aula con aforo de ";
+                atributo = R.get_aforo();
+            }
 
-        inc++;
-        std::cout << inc <<". " << R.get_id_recurso() <<  "(" << tipo_recurso << atributo << ")" << std::endl;
+            inc++;
+            std::cout << inc <<". " << R.get_id_recurso() <<  " -- (" << tipo_recurso << atributo << ")" << std::endl;
+        }
     }
 }
 
@@ -249,27 +258,37 @@ void mostrarRecursosCurso(Administrador_Recursos admin_recursos, Lista_Cursos cu
 
     Curso c = cursos.verCurso(id);
 
-    int inc, atributo;
-    std::string tipo_recurso;
+    if (c.get_id() == "none") {
+        std::cout << "Error: El curso no existe." << std::endl;
+    } else {
+        int inc, atributo;
+        std::string tipo_recurso;
 
-    std::cout << "Los recursos disponibles en el curso seleccionado son: " << std::endl;
-    inc = 0;
-
-    for ( Recurso R : c.verRecursos() ) {
-        if (R.get_recurso() == Tipo::CAMARA) {
-            tipo_recurso = "Camara con calidad de ";
-            atributo = R.get_calidad_imagen();
-        } else if (R.get_recurso() == Tipo::PROYECTOR) {
-            tipo_recurso = "Proyector con brillo de ";
-            atributo = R.get_brillo();
-        } else if (R.get_recurso() == Tipo::AULA) {
-            tipo_recurso = "Aula con aforo de ";
-            atributo = R.get_aforo();
+        if (c.verRecursos().size() < 1) {
+            std::cout << "Error: El curso no tiene recursos asignados" << std::endl;
         }
 
-        inc++;
-        std::cout << inc <<". " << R.get_id_recurso() <<  "(" << tipo_recurso << atributo << ")" << std::endl;
+        std::cout << "Los recursos disponibles en el curso seleccionado son: " << std::endl;
+        inc = 0;
+
+        for ( Recurso R : c.verRecursos() ) {
+            if (R.get_recurso() == Tipo::CAMARA) {
+                tipo_recurso = "Camara con calidad de ";
+                atributo = R.get_calidad_imagen();
+            } else if (R.get_recurso() == Tipo::PROYECTOR) {
+                tipo_recurso = "Proyector con brillo de ";
+                atributo = R.get_brillo();
+            } else if (R.get_recurso() == Tipo::AULA) {
+                tipo_recurso = "Aula con aforo de ";
+                atributo = R.get_aforo();
+            }
+
+            inc++;
+            std::cout << inc <<". " << R.get_id_recurso() <<  " -- (" << tipo_recurso << atributo << ")" << std::endl;
+        }
     }
+
+
 }
 
 void addRecursoSistema(Administrador_Recursos& admin_recursos) {
@@ -292,19 +311,31 @@ void addRecursoSistema(Administrador_Recursos& admin_recursos) {
         std::cout << "Introduce la calidad de la camara (en megapixels)> ";
         std::cin >> atributo; 
         Recurso R(id, t, atributo);
-        admin_recursos.addRecurso_Sistema(R);
+        if(admin_recursos.addRecurso_Sistema(R)) {
+            std::cout << "Recurso añadido correctamente" << std::endl;
+        } else {
+            std::cout << "Error: ya existe un recurso con el mismo identificador." << std::endl;
+        }
     } else if (tipo_n == 2) {
         t = Tipo::PROYECTOR;
         std::cout << "Introduce el brillo del proyector (en candelas)> ";
         std::cin >> atributo; 
         Recurso R(id, t, 0, atributo);
-        admin_recursos.addRecurso_Sistema(R);
+        if(admin_recursos.addRecurso_Sistema(R)) {
+            std::cout << "Recurso añadido correctamente" << std::endl;
+        } else {
+            std::cout << "Error: ya existe un recurso con el mismo identificador." << std::endl;
+        }   
     } else if (tipo_n == 3) {
         t = Tipo::AULA;
         std::cout << "Introduce el aforo maximo del aula> ";
         std::cin >> atributo;  
         Recurso R(id, t, 0, 0, atributo);
-        admin_recursos.addRecurso_Sistema(R);
+        if(admin_recursos.addRecurso_Sistema(R)) {
+            std::cout << "Recurso añadido correctamente" << std::endl;
+        } else {
+            std::cout << "Error: ya existe un recurso con el mismo identificador." << std::endl;
+        }
     } else {
         std::cout << "Error añadiendo recurso: numero invalido" << std::endl;
     }
@@ -319,11 +350,11 @@ void quitarRecursoSistema(Administrador_Recursos& admin_recursos) {
     if (admin_recursos.quitarRecurso_Sistema(id)) {
         std::cout << "El recurso se ha quitado de manera correcta." << std::endl;
     } else {
-        std::cout << "Error quitando recurso del sistema" << std::endl;
+        std::cout << "Error: este recurso no existe." << std::endl;
     }
 }
 
-void addRecursoCurso(Administrador_Recursos& admin_recursos, Lista_Cursos& cursos) {
+bool addRecursoCurso(Administrador_Recursos& admin_recursos, Lista_Cursos& cursos) {
     std::string id_curso;
     std::string id_recurso;
 
@@ -335,10 +366,16 @@ void addRecursoCurso(Administrador_Recursos& admin_recursos, Lista_Cursos& curso
 
     for (Recurso R : admin_recursos.verRecursosDisponibles()) {
         if ( R.get_id_recurso() == id_recurso) {
-            admin_recursos.addRecurso(id_curso, R);
+            if (admin_recursos.addRecurso(id_curso, R)) {
+                std::cout << "Recurso añadido al curso correctamente" << std::endl;
+                return true;
+            }
             break;
         }
     }
+
+    std::cout << "Error: el curso o recurso no existe." << std::endl;
+    return false;
 }
 
 void quitarRecursoCurso(Administrador_Recursos& admin_recursos) {
@@ -351,8 +388,10 @@ void quitarRecursoCurso(Administrador_Recursos& admin_recursos) {
     std::cout << "Introduce el ID del recurso:";
     std::cin >> id_recurso;
 
-    if(admin_recursos.quitarRecurso(id_curso, id_recurso)==false){
-        std::cout << "Algo extraño pasaba en esta linea de C++" << std::endl;
+    if(admin_recursos.quitarRecurso(id_curso, id_recurso)){
+        std::cout << "Recurso quitado correctamente" << std::endl;
+    } else {
+        std::cout << "Error: el recurso o curso no existe." << std::endl;
     }
 }
 
@@ -408,7 +447,7 @@ void addCursoSistema(Administrador_Cursos& admin_cursos){
     if (admin_cursos.addCurso(C)) {
         std::cout << "Curso añadido correctamente" << std::endl;
     } else {
-        std::cout << "Error añadiendo curso." << std::endl;
+        std::cout << "Error: El curso que intenta añadir ya existe." << std::endl;
     }
 
 }
@@ -423,17 +462,26 @@ void modificarCursoSistema(Administrador_Cursos& admin_cursos){
     
     Curso C=insertarDatosCurso();
 
-    admin_cursos.modificarCurso(C, id_curso_viejo);
+    if (admin_cursos.modificarCurso(C, id_curso_viejo)) {
+        std::cout << "El curso se ha modificado correctamente." << std::endl;
+    } else {
+        std::cout << "Error: El curso que intenta modificar no existe" << std::endl;
+    }
 
 
 }
 
 void mostrarUsuario(Usuario u) {
-    std::cout << "ID del usuario: " << u.get_id_usuario() << std::endl;
-    std::cout << "Nombre: " << u.get_name() << std::endl;
-    std::cout << "Contraseña: " << u.get_password() << std::endl;
-    std::cout << "Correo: "<< u.get_correo() << std::endl;
+    if (u.get_id_usuario() == "empty") {
+        std::cout << "Error: el usuario no existe." << std::endl;
+    } else {
+        std::cout << "ID del usuario: " << u.get_id_usuario() << std::endl;
+        std::cout << "Nombre: " << u.get_name() << std::endl;
+        std::cout << "Contraseña: " << u.get_password() << std::endl;
+        std::cout << "Correo: "<< u.get_correo() << std::endl;
+    }
 }
+
 
 void hacerAdmin(Administrador_Aplicacion& admin_app, Administrador_Recursos& admin_recursos, Administrador_Cursos& admin_cursos, Lista_Usuarios& usuarios){
     std::string user;
@@ -450,7 +498,10 @@ void hacerAdmin(Administrador_Aplicacion& admin_app, Administrador_Recursos& adm
 
     Usuario u = usuarios.verUsuario(user);
 
-    switch (admin) {
+    if (u.get_id_usuario() == "empty") {
+        std::cout << "Error: El ususario no existe." << std::endl;
+    } else {
+        switch (admin) {
         case 1:
             admin_cursos.set_id_usuario(u.get_id_usuario());
             admin_cursos.set_name(u.get_name());
@@ -481,9 +532,8 @@ void hacerAdmin(Administrador_Aplicacion& admin_app, Administrador_Recursos& adm
         default:
             std::cout << "Error, el numero introducido es invalido." << std::endl;
             break;
+        }
     }
-
-
 }
 
 Usuario insertarDatosUsuario(){
@@ -510,13 +560,21 @@ Usuario insertarDatosUsuario(){
 
 void addUsuarioSistema(Lista_Usuarios& usuarios){
     Usuario u=insertarDatosUsuario();
-    usuarios.addUsuario(u);
+    if (usuarios.addUsuario(u)) {
+        std::cout << "Usuario añadido correctamente" << std::endl;
+    } else {
+        std::cout << "Error: el usuario ya existe." <<std::endl;
+    }
 
 }
 
 void eliminarUsuario(Administrador_Aplicacion& admin_app, std::string id){
     
-    admin_app.borrarUsuario(id);
+    if (admin_app.borrarUsuario(id)) {
+        std::cout << "Usuario borrado correctamente" << std::endl;
+    } else {
+        std::cout << "Error: el usuario no existe." << std::endl;
+    }
 }
 
 void modificarUsuario(Administrador_Aplicacion& admin_app){
@@ -528,7 +586,11 @@ void modificarUsuario(Administrador_Aplicacion& admin_app){
     std::cout<<"A continuacion, introduzca los nuevos datos del usuario"<<std::endl;
     Usuario nuevo=insertarDatosUsuario();
 
-    admin_app.modificarUsuario(id_usuario_viejo,nuevo);
+    if (admin_app.modificarUsuario(id_usuario_viejo,nuevo)) {
+        std::cout << "Usuario modificado correctamente" << std::endl;
+    } else {
+        std::cout << "Error: el usuario no existe." << std::endl;
+    }
 }
 
 void quitarCurso(Lista_Cursos& cursos){
@@ -537,5 +599,9 @@ void quitarCurso(Lista_Cursos& cursos){
     std::cout<<"Inserte el ID del curso: ";
     std::cin>>id;
 
-    cursos.quitarCurso(id);
+    if(cursos.quitarCurso(id)) {
+        std::cout << "Curso quitado correctamente" << std::endl;
+    } else {
+        std::cout << "Error: el curso no existe" << std::endl;
+    }
 }
