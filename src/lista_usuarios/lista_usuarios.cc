@@ -88,6 +88,7 @@ bool Lista_Usuarios::deleteUsuario(std::string id_usuario){
     for(auto it=lista_usuarios_.begin();it!=lista_usuarios_.end();it++){
         if(it->get_id_usuario()==id_usuario){
             it=lista_usuarios_.erase(it);
+            this->guardarUsuarios();
             return true;
         }
     }

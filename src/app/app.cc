@@ -467,7 +467,7 @@ void hacerAdmin(Administrador_Aplicacion& admin_app, Administrador_Recursos& adm
             admin_recursos.set_correo(u.get_correo());
             usuarios.deleteUsuario(u.get_id_usuario());
             std::cout << "Establecido el usuario " << u.get_id_usuario() << " como administrador de recursos" << std::endl;
-            admin_cursos.guardarAdministrador();
+            admin_recursos.guardarAdministrador();
             break;
         case 3:
             admin_app.set_id_usuario(u.get_id_usuario());
@@ -476,7 +476,7 @@ void hacerAdmin(Administrador_Aplicacion& admin_app, Administrador_Recursos& adm
             admin_app.set_correo(u.get_correo());
             usuarios.deleteUsuario(u.get_id_usuario());
             std::cout << "Establecido el usuario " << u.get_id_usuario() << " como administrador de la aplicacion" << std::endl;
-            admin_cursos.guardarAdministrador();
+            admin_app.guardarAdministrador();
             break;
         default:
             std::cout << "Error, el numero introducido es invalido." << std::endl;

@@ -24,7 +24,7 @@ bool Inicio_Sesion::iniciarSesion(std::string usuario, std::string password)
                 this->set_password(admin_cursos_.get_password());
                 this->set_name(admin_cursos_.get_name());
                 this->set_correo(admin_cursos_.get_correo());
-                std::cout << "HOla estoy aqui";
+
                 tipo_admin_ = "cursos";
                 return true;
             }
