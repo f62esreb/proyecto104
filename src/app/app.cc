@@ -139,6 +139,7 @@ void mostrarCurso(Curso c) {
         std::cout << "Ponentes: " << c.get_ponentes() << std::endl;
         std::cout << "Participantes: " << c.get_participantes() << std::endl;
         std::cout << "Max participantes: " << c.get_max_participantes() << std::endl;
+        std::cout << "Precio: " << c.get_precio() << "€" << std::endl;
         std::cout << "Para mas informacion pongase en contacto con " << c.get_correo_admin_curso() << std::endl;
     } else {
         std::cout << "Error: no existe el curso." << std::endl;
@@ -151,6 +152,7 @@ void mostrarCursos(Lista_Cursos cursos) {
         std::cout << "ID del curso: " << c.get_id() << std::endl;
         std::cout << "Nombre: " << c.get_nombre() << std::endl;
         std::cout << "Descripcion: " << c.get_descripcion() << std::endl;
+        std::cout << "Precio: " << c.get_precio() << "€" << std::endl;
         std::cout << "----------------------------------------------" << std::endl;
     }
 }
